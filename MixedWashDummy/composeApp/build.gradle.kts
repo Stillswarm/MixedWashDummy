@@ -43,10 +43,6 @@ kotlin {
             implementation(libs.androidx.lifecycle.viewmodel)
             implementation(libs.androidx.lifecycle.runtime.compose)
 
-            // Coil
-            implementation("io.coil-kt.coil3:coil-compose:3.0.4")
-            implementation("io.coil-kt.coil3:coil-network-okhttp:3.0.4")
-
 
             implementation("androidx.core:core-ktx:1.12.0")
             implementation("androidx.compose.ui:ui-text-google-fonts:1.6.1")
@@ -83,6 +79,7 @@ android {
 
 dependencies {
     implementation("androidx.compose.ui:ui-text-google-fonts:1.7.7")
+    implementation("androidx.compose.material3:material3-android:1.3.1")
     debugImplementation(compose.uiTooling)
 }
 
