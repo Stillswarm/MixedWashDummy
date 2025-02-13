@@ -38,8 +38,9 @@ fun OfferCard(
     modifier: Modifier = Modifier
 ) {
 
-    Card(shape = RoundedCornerShape(12.dp),
-        modifier = Modifier.padding(bottom = 8.dp)
+    Card(
+        shape = RoundedCornerShape(12.dp),
+        modifier = modifier.padding(bottom = 8.dp)
             .dropShadow(shape = RoundedCornerShape(12.dp), color = Gray400, offsetY = 16.dp)
     ) {
         Box(

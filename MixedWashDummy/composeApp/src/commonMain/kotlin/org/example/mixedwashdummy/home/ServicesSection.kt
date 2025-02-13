@@ -31,8 +31,12 @@ import org.example.mixedwashdummy.util.gradient
 import org.jetbrains.compose.resources.painterResource
 
 @Composable
-fun ServicesSection(modifier: Modifier = Modifier, onSeeAll: () -> Unit, textColor: Color = Gray700) {
-    Column {
+fun ServicesSection(
+    modifier: Modifier = Modifier,
+    onSeeAll: () -> Unit,
+    textColor: Color = Gray700
+) {
+    Column(modifier = modifier) {
         Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
             Text(
                 text = "Services",
@@ -61,11 +65,15 @@ fun ServiceCard(serviceLabel: String, onClick: () -> Unit, modifier: Modifier = 
         onClick = onClick,
         modifier = modifier.gradient(gradientDark = Gray300, gradientLight = Gray100)
     ) {
-        Column(modifier = Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
+        Column(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
             Image(
                 painter = painterResource(Res.drawable.image1),
                 contentDescription = null,
-                modifier = Modifier.padding(horizontal = 15.dp, vertical = 20.dp).height(80.17.dp).width(100.dp),
+                modifier = Modifier.padding(horizontal = 15.dp, vertical = 20.dp).height(80.17.dp)
+                    .width(100.dp),
                 contentScale = ContentScale.Crop
             )
 

@@ -14,11 +14,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import org.example.mixedwashdummy.common.TitleWithIcon
 import org.example.mixedwashdummy.theme.dividerBlack
+import org.example.mixedwashdummy.util.edgePadding
 
 @Composable
 fun OrderHistoryScreen(modifier: Modifier = Modifier) {
     LazyColumn(
-        modifier = modifier.fillMaxSize(),
+        modifier = modifier.fillMaxSize().edgePadding().padding(16.dp),
         verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
         item {

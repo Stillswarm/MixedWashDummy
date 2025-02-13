@@ -8,6 +8,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import org.example.mixedwashdummy.theme.Gray800
 
@@ -18,7 +19,8 @@ fun AppOutlinedButton(
     shape: Shape = RoundedCornerShape(8.dp),
     borderColor: Color = Gray800,
     titleColor: Color = Gray800,
-    textStyle: TextStyle = MaterialTheme.typography.button
+    textStyle: TextStyle = MaterialTheme.typography.button,
+    fontWeight: FontWeight = FontWeight.Normal
 ) {
     OutlinedButton(
         onClick = onClick,
@@ -28,7 +30,8 @@ fun AppOutlinedButton(
         AppText(
             text = buttonTitle,
             color = titleColor,
-            style = textStyle
+            style = textStyle,
+            fontWeight = fontWeight
         )
     }
 }

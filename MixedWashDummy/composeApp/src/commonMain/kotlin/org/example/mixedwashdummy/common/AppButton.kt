@@ -5,6 +5,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Button
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.text.TextStyle
@@ -18,9 +19,11 @@ fun AppButton(
     shape: Shape = RoundedCornerShape(8.dp),
     borderColor: Color = Gray800,
     titleColor: Color = Gray800,
-    textStyle: TextStyle = MaterialTheme.typography.button
+    textStyle: TextStyle = MaterialTheme.typography.button,
+    modifier: Modifier = Modifier
 ) {
     Button(
+        modifier = modifier,
         onClick = onClick,
         shape = shape,
         border = BorderStroke(1.dp, borderColor)

@@ -2,10 +2,15 @@ package org.example.mixedwashdummy.home
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.height
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import org.example.mixedwashdummy.common.GradientBox
+import androidx.compose.ui.unit.dp
+import org.example.mixedwashdummy.util.edgePadding
+import org.example.mixedwashdummy.util.gradient
 
 @Composable
 fun HomeScreenHeader(
@@ -14,29 +19,35 @@ fun HomeScreenHeader(
     description: String,
     gradientDark: Color,
     gradientLight: Color,
+    textColor: Color,
+    topBarContentColor: Color,
     buttonTitle: String,
     onButtonClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     Box {
-        GradientBox(
-            modifier = Modifier.matchParentSize(),
-            gradientLight = gradientLight,
-            gradientDark = gradientDark
+
+        Box(
+            modifier = modifier.matchParentSize().fillMaxHeight(0.9f)
+                .gradient(gradientDark, gradientLight)
         )
 
-        Column {
+        Column(modifier = Modifier.edgePadding(extraHorizontal = 12.dp, extraVertical = 12.dp)) {
             HomeTopBar(
                 addressKey = "Home",
                 address = "560095, Bengaluru",
                 onExpand = {},
                 onNotificationClick = {},
-                onFAQsClick = {}
+                onFAQsClick = {},
+                textColor = topBarContentColor,
             )
+
+            Spacer(Modifier.height(12.dp))
 
             HeaderContent(
                 title = title,
                 imageUrl = imageUrl,
+                textColor = textColor,
                 description = description,
                 buttonTitle = buttonTitle,
                 onButtonClick = onButtonClick

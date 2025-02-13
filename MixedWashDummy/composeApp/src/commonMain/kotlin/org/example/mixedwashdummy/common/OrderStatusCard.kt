@@ -39,9 +39,12 @@ fun OrderStatusCard(
     imageUrl: String,
     modifier: Modifier = Modifier
 ) {
-    Card(shape = RoundedCornerShape(12.dp)) {
+    Card(modifier = modifier, shape = RoundedCornerShape(12.dp)) {
 
-        Box(modifier = Modifier.fillMaxWidth().gradient(gradientDark = Gray300, gradientLight = Gray100)) {
+        Box(
+            modifier = Modifier.fillMaxWidth()
+                .gradient(gradientDark = Gray300, gradientLight = Gray100)
+        ) {
 
             Column(
                 modifier = Modifier.padding(horizontal = 32.dp, vertical = 18.dp)
