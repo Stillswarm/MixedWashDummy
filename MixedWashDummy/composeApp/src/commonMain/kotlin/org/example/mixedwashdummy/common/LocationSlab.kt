@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.KeyboardArrowDown
@@ -14,6 +15,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 
 @Composable
@@ -37,18 +39,23 @@ fun LocationSlab(
 
         Column {
             Row(verticalAlignment = Alignment.CenterVertically) {
-                Text(text = addressKey, color = contentColor)
+                AppText(
+                    text = addressKey,
+                    color = contentColor,
+                    fontWeight = FontWeight.W600,
+                    style = MaterialTheme.typography.subtitle1
+                )
 
-                    Icon(
-                        imageVector = Icons.Default.KeyboardArrowDown,
-                        contentDescription = "Expand",
-                        tint = contentColor,
-                        modifier = Modifier.clickable {
-                            onExpand()
-                        }
-                    )
+                Icon(
+                    imageVector = Icons.Default.KeyboardArrowDown,
+                    contentDescription = "Expand",
+                    tint = contentColor,
+                    modifier = Modifier.clickable {
+                        onExpand()
+                    }
+                )
             }
-            Text(text = address, color = contentColor)
+            AppText(text = address, color = contentColor, style = MaterialTheme.typography.subtitle1)
         }
     }
 }

@@ -1,14 +1,21 @@
 package org.example.mixedwashdummy.common
 
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.indication
+import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Button
+import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import org.example.mixedwashdummy.theme.Gray100
 import org.example.mixedwashdummy.theme.Gray800
 
 @Composable
@@ -18,17 +25,28 @@ fun AppButton(
     shape: Shape = RoundedCornerShape(8.dp),
     borderColor: Color = Gray800,
     titleColor: Color = Gray800,
-    textStyle: TextStyle = MaterialTheme.typography.button
+    textStyle: TextStyle = MaterialTheme.typography.button,
+    modifier: Modifier = Modifier,
+    interactionSource: MutableInteractionSource = MutableInteractionSource(),
+    backgroundColor: Color = Gray100,
+    contentPadding: Dp = 0.dp
 ) {
     Button(
+        modifier = modifier,
         onClick = onClick,
         shape = shape,
-        border = BorderStroke(1.dp, borderColor)
+        border = BorderStroke(1.dp, borderColor),
+        interactionSource = interactionSource,
+        colors = ButtonDefaults.buttonColors(backgroundColor = backgroundColor)
     ) {
         AppText(
             text = buttonTitle,
             color = titleColor,
-            style = textStyle
+            style = textStyle,
+            modifier = Modifier.padding(contentPadding).indication(
+                interactionSource = interactionSource,
+                indication = null
+            )
         )
     }
 }

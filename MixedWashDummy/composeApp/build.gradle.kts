@@ -32,6 +32,7 @@ kotlin {
         androidMain.dependencies {
             implementation(compose.preview)
             implementation(libs.androidx.activity.compose)
+            implementation(libs.ktor.client.android)
         }
         commonMain.dependencies {
             implementation(compose.runtime)
@@ -46,6 +47,10 @@ kotlin {
 
             implementation("androidx.core:core-ktx:1.12.0")
             implementation("androidx.compose.ui:ui-text-google-fonts:1.6.1")
+
+            // Coil
+            implementation(libs.coil.compose)
+            implementation(libs.coil.network.ktor)
         }
     }
 }

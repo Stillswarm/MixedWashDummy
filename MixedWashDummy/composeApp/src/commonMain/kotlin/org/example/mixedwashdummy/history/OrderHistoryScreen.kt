@@ -8,30 +8,37 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material.Divider
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import mixedwashdummy.composeapp.generated.resources.Res
+import mixedwashdummy.composeapp.generated.resources.hangar_order_icon
+import mixedwashdummy.composeapp.generated.resources.insights_icon
+import org.example.mixedwashdummy.InsightMetric
 import org.example.mixedwashdummy.common.TitleWithIcon
 import org.example.mixedwashdummy.theme.dividerBlack
+import org.example.mixedwashdummy.util.edgePadding
 
 @Composable
-fun OrderHistoryScreen(modifier: Modifier = Modifier) {
+fun OrderHistoryScreen(insightMetrics: List<InsightMetric>, modifier: Modifier = Modifier) {
     LazyColumn(
-        modifier = modifier.fillMaxSize(),
+        modifier = modifier.fillMaxSize().edgePadding().padding(16.dp),
         verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
         item {
-            TitleWithIcon(title = "Insights")
+            TitleWithIcon(title = "Insights", icon = Res.drawable.insights_icon)
         }
 
         item {
             LazyRow {
-                items(10) {
+                items(insightMetrics) {
                     StatisticCard(
                         value = 29,
-                        metric = "time saved",
-                        unit = "hrs",
+                        metric = it.metric,
+                        unit = it.unit,
+                        icon = it.icon,
                         modifier = Modifier.padding((8.dp)),
                     )
 
@@ -40,7 +47,7 @@ fun OrderHistoryScreen(modifier: Modifier = Modifier) {
         }
 
         item {
-            TitleWithIcon(title = "Orders")
+            TitleWithIcon(title = "Orders", icon = Res.drawable.hangar_order_icon)
         }
 
         items(10) {

@@ -1,7 +1,7 @@
 package org.example.mixedwashdummy.history
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -12,27 +12,24 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
-import androidx.compose.material.DrawerDefaults.shape
-import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.Send
-import androidx.compose.material.icons.filled.Done
-import androidx.compose.material.icons.outlined.Done
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.unit.dp
 import org.example.mixedwashdummy.common.AppText
-import org.example.mixedwashdummy.theme.Gray100
 import org.example.mixedwashdummy.theme.Gray200
 import org.example.mixedwashdummy.theme.Gray400
+import org.jetbrains.compose.resources.DrawableResource
+import org.jetbrains.compose.resources.painterResource
 
 @Composable
 fun StatisticCard(
     value: Int,
     metric: String,
     unit: String,
+    icon: DrawableResource,
     modifier: Modifier = Modifier
 ) {
     Card(
@@ -55,11 +52,11 @@ fun StatisticCard(
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                    // TODO: Replace with actual icon
-                    Icon(
-                        imageVector = Icons.Default.Done,
+                    Image(
+                        painter = painterResource(icon),
                         contentDescription = null,
-                        tint = Gray400,
+                        modifier = Modifier.size(16.dp),
+                        colorFilter = ColorFilter.tint(color = Gray400)
                     )
 
                     AppText(

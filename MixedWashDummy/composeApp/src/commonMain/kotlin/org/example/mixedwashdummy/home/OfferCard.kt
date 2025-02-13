@@ -1,6 +1,5 @@
 package org.example.mixedwashdummy.home
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -18,8 +17,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
-import mixedwashdummy.composeapp.generated.resources.Res
-import mixedwashdummy.composeapp.generated.resources.image1
+import org.example.mixedwashdummy.common.AsyncImageLoader
 import org.example.mixedwashdummy.theme.Gray100
 import org.example.mixedwashdummy.theme.Gray400
 import org.example.mixedwashdummy.theme.Gray700
@@ -27,7 +25,6 @@ import org.example.mixedwashdummy.theme.Gray800
 import org.example.mixedwashdummy.theme.Gray900
 import org.example.mixedwashdummy.util.dropShadow
 import org.example.mixedwashdummy.util.gradient
-import org.jetbrains.compose.resources.painterResource
 
 @Composable
 fun OfferCard(
@@ -38,12 +35,13 @@ fun OfferCard(
     modifier: Modifier = Modifier
 ) {
 
-    Card(shape = RoundedCornerShape(12.dp),
-        modifier = Modifier.padding(bottom = 8.dp)
+    Card(
+        shape = RoundedCornerShape(12.dp),
+        modifier = modifier.padding(bottom = 8.dp)
             .dropShadow(shape = RoundedCornerShape(12.dp), color = Gray400, offsetY = 16.dp)
     ) {
         Box(
-            modifier = Modifier.gradient(gradientLight = Gray800, gradientDark = Gray900, order = 2)
+            modifier = Modifier.gradient(colorStops = arrayOf(Pair(0f, Gray800), Pair(1f, Gray900)))
                 .padding(16.dp)
         ) {
 
@@ -51,7 +49,7 @@ fun OfferCard(
                 modifier = Modifier.fillMaxWidth().padding(16.dp),
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                Column {
+                Column(modifier = Modifier.weight(1f)) {
                     Text(
                         text = details,
                         color = Gray100
@@ -66,13 +64,12 @@ fun OfferCard(
                     }
                 }
 
-                Image(
-                    painter = painterResource(Res.drawable.image1),
+                AsyncImageLoader(
+                    imageUrl = imageUrl,
                     modifier = Modifier.height(72.dp).width(77.65.dp),
                     contentScale = ContentScale.Fit,
                     contentDescription = null
                 )
-                // TODO: Replace with actual image
             }
 
         }
