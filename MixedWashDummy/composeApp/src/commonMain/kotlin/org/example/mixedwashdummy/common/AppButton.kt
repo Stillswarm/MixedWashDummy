@@ -13,7 +13,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import org.example.mixedwashdummy.theme.Gray100
 import org.example.mixedwashdummy.theme.Gray800
@@ -27,6 +29,9 @@ fun AppButton(
     titleColor: Color = Gray800,
     textStyle: TextStyle = MaterialTheme.typography.button,
     modifier: Modifier = Modifier,
+    fontSize: TextUnit = TextUnit.Unspecified,
+    fontWeight: FontWeight = FontWeight.Normal,
+    lineHeight: TextUnit = TextUnit.Unspecified,
     interactionSource: MutableInteractionSource = MutableInteractionSource(),
     backgroundColor: Color = Gray100,
     contentPadding: Dp = 0.dp
@@ -46,7 +51,10 @@ fun AppButton(
             modifier = Modifier.padding(contentPadding).indication(
                 interactionSource = interactionSource,
                 indication = null
-            )
+            ),
+            fontWeight = fontWeight,
+            fontSize = fontSize,
+            lineHeight = lineHeight,
         )
     }
 }

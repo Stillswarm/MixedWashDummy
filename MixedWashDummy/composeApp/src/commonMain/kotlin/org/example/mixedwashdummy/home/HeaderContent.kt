@@ -1,17 +1,22 @@
 package org.example.mixedwashdummy.home
 
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import org.example.mixedwashdummy.HomeHeaderData
 import org.example.mixedwashdummy.common.AppOutlinedButton
 import org.example.mixedwashdummy.common.AppText
@@ -25,33 +30,45 @@ fun HeaderContent(
 ) {
 
     Row(modifier = modifier.fillMaxWidth()) {
-        AsyncImageLoader(
-            imageUrl = dataItem.imageUrl,
-            contentDescription = dataItem.heading,
-            contentScale = ContentScale.FillBounds,
-            modifier = Modifier.offset(y = 36.dp)
-        )
+        Box {
+            AsyncImageLoader(
+                imageUrl = dataItem.imageUrl,
+                modifier = Modifier.height(160.dp)
+                            .align(Alignment.BottomStart)
+                            .offset(y = 52.dp),
+                contentDescription = dataItem.heading,
+            )
+        }
 
-        Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
+        Column(
+            modifier = Modifier.padding(horizontal = 16.dp, vertical = 30.5.dp).width(189.dp),
+            verticalArrangement = Arrangement.spacedBy(16.dp)
+        ) {
             AppText(
                 text = dataItem.heading,
-                style = MaterialTheme.typography.h5,
-                color = dataItem.textColor
+                color = dataItem.textColor,
+                fontWeight = FontWeight.Medium,
+                fontSize = 24.sp,
+                lineHeight = 18.sp
             )
 
             AppText(
                 text = dataItem.description,
-                style = MaterialTheme.typography.body1,
+                fontSize = 12.sp,
+                lineHeight = 18.sp,
                 color = dataItem.textColor
             )
 
             AppOutlinedButton(
+                contentPadding = PaddingValues(horizontal = 14.dp, vertical = 6.dp),
                 onClick = onButtonClick,
                 shape = RoundedCornerShape(8.dp),
                 borderColor = dataItem.textColor,
                 buttonTitle = dataItem.buttonText,
                 titleColor = dataItem.textColor,
-                fontWeight = FontWeight.Bold
+                fontWeight = FontWeight.SemiBold,
+                fontSize = 12.sp,
+                lineHeight = 18.sp
             )
         }
     }

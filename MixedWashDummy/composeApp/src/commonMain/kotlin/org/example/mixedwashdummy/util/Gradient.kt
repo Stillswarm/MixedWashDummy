@@ -10,6 +10,13 @@ import kotlin.math.cos
 import kotlin.math.hypot
 import kotlin.math.sin
 
+// TODO: gradients with float stops
+
+/*
+    background: linear-gradient(289deg, #EFEFEB 3.38%, #F3F3F3 96.62%);
+
+ */
+
 fun Modifier.gradient(
     colorStops: Array<Pair<Float, Color>>,
     angle: Float = 0f, // Angle in degrees

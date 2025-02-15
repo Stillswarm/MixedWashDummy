@@ -1,29 +1,41 @@
 package org.example.mixedwashdummy.common
 
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Card
 import androidx.compose.material.Divider
-import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Icon
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
+import androidx.compose.ui.Alignment.Companion.CenterVertically
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.style.TextDecoration
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import mixedwashdummy.composeapp.generated.resources.Res
+import mixedwashdummy.composeapp.generated.resources.ellipse_135_icon
+import mixedwashdummy.composeapp.generated.resources.insights_icon
 import org.example.mixedwashdummy.theme.Gray100
 import org.example.mixedwashdummy.theme.Gray300
 import org.example.mixedwashdummy.theme.Gray500
 import org.example.mixedwashdummy.theme.Gray700
+import org.example.mixedwashdummy.theme.Green
 import org.example.mixedwashdummy.theme.dividerBlack
 import org.example.mixedwashdummy.util.gradient
+import org.jetbrains.compose.resources.painterResource
+import org.jetbrains.compose.resources.vectorResource
 
 @Composable
 fun OrderStatusCard(
@@ -35,63 +47,126 @@ fun OrderStatusCard(
     imageUrl: String,
     modifier: Modifier = Modifier
 ) {
-    Card(modifier = modifier, shape = RoundedCornerShape(12.dp)) {
+    Box(modifier = modifier.clip(RoundedCornerShape(12.dp))) {
 
         Box(
             modifier = Modifier.fillMaxWidth()
                 .gradient(colorStops = arrayOf(Pair(0f, Gray100), Pair(1f, Gray300)))
         ) {
-
             Column(
-                modifier = Modifier.padding(horizontal = 32.dp, vertical = 18.dp)
+                modifier = Modifier.fillMaxWidth()
+                    .padding(horizontal = 32.dp, vertical = 16.dp),
             ) {
-                Text(
-                    text = orderId,
-                    style = MaterialTheme.typography.subtitle1,
-                    color = Gray500
-                )
-
                 Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    verticalAlignment = Alignment.CenterVertically
+                    verticalAlignment = CenterVertically
                 ) {
                     Column(
-                        modifier = Modifier.weight(1f),
-                        verticalArrangement = Arrangement.spacedBy(16.dp)
+                        modifier = Modifier.weight(1f)
                     ) {
-                        Text(
-                            text = "$title • $subtitle",
-                            style = MaterialTheme.typography.h6,
-                            color = Gray700
-                        )
+                        Column {
+                            Text(
+                                text = orderId,
+                                fontSize = 12.sp,
+                                lineHeight = 12.sp,
+                                color = Gray500
+                            )
 
-                        Text(
-                            text = description,
-                            style = MaterialTheme.typography.body1,
-                            color = Gray700
-                        )
+                            Spacer(Modifier.padding(2.dp))
 
-                        Text(
-                            text = "View Details",
-                            style = MaterialTheme.typography.body1,
-                            textDecoration = TextDecoration.Underline,
-                            color = Gray700,
-                            modifier = Modifier.clickable { onDetailsClick() }
-                        )
+                            Text(
+                                text = "$title • $subtitle",
+                                fontSize = 16.sp,
+                                fontWeight = FontWeight.Medium,
+                                color = Gray700
+                            )
+                        }
+
+                        Spacer(Modifier.height(8.dp))
+
+                        Column {
+                            AppText(
+                                text = description,
+                                fontSize = 12.sp,
+                                color = Gray700
+                            )
+
+                            Spacer(Modifier.height(6.dp))
+
+                            UnderlineBox(lineColor = Gray700) {
+                                AppText(
+                                    text = "View Details",
+                                    fontSize = 12.sp,
+                                    color = Gray700,
+                                    modifier = Modifier.clickable { onDetailsClick() }
+                                )
+                            }
+                        }
                     }
 
                     AsyncImageLoader(
                         imageUrl = imageUrl,
                         contentDescription = null,
-                        modifier = Modifier.size(100.dp)
+                        modifier = Modifier.size(74.dp)
+
                     )
                 }
 
                 Divider(color = dividerBlack, modifier = Modifier.padding(8.dp))
 
-                // TODO : implement progress icons here
-                // pickup, process, wash, delivery
+                Spacer(Modifier.height(16.5.dp))
+
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceBetween
+                ) {
+                    ProgressStage("Pickup", 2)
+                    ProgressStage("Process", 2)
+                    ProgressStage("Wash", 1)
+                    ProgressStage("Delivery", 0)
+                }
             }
+
         }
     }
+}
+
+/**
+ * @param state 0 -> pending, 1 -> in progress, 2 -> completed
+ */
+@Composable
+fun ProgressStage(stageName: String, state: Int, modifier: Modifier = Modifier) {
+    Row(
+        horizontalArrangement = Arrangement.spacedBy(4.dp),
+        verticalAlignment = CenterVertically
+    ) {
+        when (state) {
+            0 ->
+                Icon(
+                    imageVector = vectorResource(Res.drawable.ellipse_135_icon),
+                    contentDescription = null,
+                    tint = Gray700,
+                )
+
+            1 ->
+                Image(
+                    painter = painterResource(Res.drawable.insights_icon),
+                    contentDescription = null,
+                )
+
+            2 ->
+                Box(modifier = Modifier.clip(CircleShape).background(color = Green)) {
+                    Image(
+                        painter = painterResource(Res.drawable.insights_icon),
+                        contentDescription = null
+                    )
+                }
+        }
+    }
+
+    AppText(
+        text = stageName,
+        fontSize = 12.sp,
+        color = Gray700,
+        lineHeight = 14.4.sp
+    )
 }

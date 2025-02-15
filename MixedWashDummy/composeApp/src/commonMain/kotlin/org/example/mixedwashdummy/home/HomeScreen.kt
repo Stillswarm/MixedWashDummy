@@ -36,7 +36,7 @@ fun HomeScreen(modifier: Modifier = Modifier) {
 
         OrderStatusCard(
             orderId = "#1022153",
-            title = "Wash and Fold",
+            title = "Wash & Fold",
             subtitle = "Heavy Wash",
             description = "Your order is currently being washed at our facility",
             onDetailsClick = { },
