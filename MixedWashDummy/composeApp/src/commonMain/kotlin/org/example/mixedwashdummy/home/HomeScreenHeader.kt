@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -17,7 +18,7 @@ fun HomeScreenHeader(
     modifier: Modifier = Modifier
 ) {
 
-    val item = headerData[0]    // TODO: find ways to show diff. items at diff. times
+    val item = headerData[3]    // TODO: find ways to show diff. items at diff. times
     Box(modifier = Modifier.height(276.dp)) {
         Box(
             modifier = modifier.matchParentSize()
@@ -30,7 +31,7 @@ fun HomeScreenHeader(
         )
 
         Column(
-            modifier = Modifier
+            modifier = Modifier.statusBarsPadding()
         ) {
             HomeTopBar(
                 addressKey = "Home",

@@ -11,7 +11,7 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
 @Preview
-fun App() {
+fun App(onScroll: (Boolean) -> Unit) {
     val customTypography = MaterialTheme.typography.let {
         it.copy(
             h1 = it.h1.copy(fontFamily = Poppins()),
@@ -29,6 +29,8 @@ fun App() {
             overline = it.overline.copy(fontFamily = Poppins())
         )
     }
+
+
     MaterialTheme(
         typography = customTypography
     ) {
@@ -36,6 +38,7 @@ fun App() {
 //            services = DummyData.services,
 //            current = 1,
 //            insightMetrics = DummyData.insightMetrics,
+            onScroll = onScroll,
             modifier = Modifier.background(Gray50)
         )
     }

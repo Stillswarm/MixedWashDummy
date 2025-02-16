@@ -51,6 +51,8 @@ kotlin {
             // Coil
             implementation(libs.coil.compose)
             implementation(libs.coil.network.ktor)
+
+            implementation("com.google.accompanist:accompanist-systemuicontroller:0.30.1")
         }
     }
 }

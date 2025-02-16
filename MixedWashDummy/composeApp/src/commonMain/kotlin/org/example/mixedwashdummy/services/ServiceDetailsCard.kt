@@ -137,7 +137,7 @@ fun ServiceDetailsCard(
                 }
             }
 
-            Column(modifier = Modifier.width(190.dp)) {
+            Column(modifier = Modifier.width(200.dp)) {
                 AppText(
                     text = "your whites and colored items will be washed together and tumble dried",
                     lineHeight = 16.8.sp,

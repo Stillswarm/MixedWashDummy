@@ -2,14 +2,17 @@ package org.example.mixedwashdummy.home
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import kotlinx.coroutines.flow.collectLatest
 import org.example.mixedwashdummy.DummyData
 import org.example.mixedwashdummy.common.OrderStatusCard
-import org.example.mixedwashdummy.util.edgePadding
 
 /**
  * Notes:
@@ -21,13 +24,23 @@ import org.example.mixedwashdummy.util.edgePadding
  *      (Are there better ways of doing this?)
  */
 
-val edgePadding = Modifier.edgePadding(extraHorizontal = 16.dp)
+val edgePadding = Modifier.padding(horizontal = 16.dp)
 
 @Composable
-fun HomeScreen(modifier: Modifier = Modifier) {
+fun HomeScreen(onScroll: (Boolean) -> Unit, modifier: Modifier = Modifier) {
+
+    val scrollState = rememberScrollState()
+
+    LaunchedEffect(scrollState) {
+        snapshotFlow { scrollState.value }
+            .collectLatest { scrollOffset ->
+                onScroll(scrollOffset > 0)
+            }
+    }
+
     Column(
-        modifier = modifier.verticalScroll(rememberScrollState()),
-        verticalArrangement = Arrangement.spacedBy(24.dp)
+        modifier = modifier.verticalScroll(scrollState),
+        verticalArrangement = Arrangement.spacedBy(24.dp),
     ) {
         HomeScreenHeader(
             headerData = DummyData.headerData,
@@ -53,7 +66,11 @@ fun HomeScreen(modifier: Modifier = Modifier) {
         )
 
         // TODO: Replace Dummy with actual
-        ServicesSection(services = DummyData.services, onSeeAll = {}, modifier = Modifier.edgePadding(extraHorizontal = 16.dp))
+        ServicesSection(
+            services = DummyData.services,
+            onSeeAll = {},
+            modifier = edgePadding
+        )
 
         GettingStartedSection(
             onExplore = {},
@@ -62,3 +79,4 @@ fun HomeScreen(modifier: Modifier = Modifier) {
         )
     }
 }
+//}
