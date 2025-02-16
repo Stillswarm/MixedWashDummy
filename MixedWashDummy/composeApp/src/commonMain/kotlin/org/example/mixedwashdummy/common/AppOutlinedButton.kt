@@ -30,6 +30,7 @@ fun AppOutlinedButton(
     fontSize: TextUnit = TextUnit.Unspecified,
     fontWeight: FontWeight = FontWeight.Normal,
     lineHeight: TextUnit = TextUnit.Unspecified,
+    letterSpacing: TextUnit = TextUnit.Unspecified,
     interactionSource: MutableInteractionSource = MutableInteractionSource(),
 ) {
     TextButton(
@@ -51,6 +52,7 @@ fun AppOutlinedButton(
                 interactionSource = interactionSource,
                 indication = null
             ),
+            letterSpacing = letterSpacing
         )
     }
 }

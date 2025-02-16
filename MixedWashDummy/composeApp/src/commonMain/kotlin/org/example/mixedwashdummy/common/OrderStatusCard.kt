@@ -25,8 +25,9 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import mixedwashdummy.composeapp.generated.resources.Res
-import mixedwashdummy.composeapp.generated.resources.ellipse_135_icon
-import mixedwashdummy.composeapp.generated.resources.insights_icon
+import mixedwashdummy.composeapp.generated.resources.ic_completed
+import mixedwashdummy.composeapp.generated.resources.ic_ongoing
+import mixedwashdummy.composeapp.generated.resources.ic_pending
 import org.example.mixedwashdummy.theme.Gray100
 import org.example.mixedwashdummy.theme.Gray300
 import org.example.mixedwashdummy.theme.Gray500
@@ -111,13 +112,16 @@ fun OrderStatusCard(
                     )
                 }
 
+                Spacer(Modifier.height(16.dp))
+
                 Divider(color = dividerBlack, modifier = Modifier.padding(8.dp))
 
-                Spacer(Modifier.height(16.5.dp))
+                Spacer(Modifier.height(16.dp))
 
                 Row(
                     modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.SpaceBetween
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    verticalAlignment = CenterVertically
                 ) {
                     ProgressStage("Pickup", 2)
                     ProgressStage("Process", 2)
@@ -136,37 +140,38 @@ fun OrderStatusCard(
 @Composable
 fun ProgressStage(stageName: String, state: Int, modifier: Modifier = Modifier) {
     Row(
+        modifier = modifier,
         horizontalArrangement = Arrangement.spacedBy(4.dp),
         verticalAlignment = CenterVertically
     ) {
         when (state) {
             0 ->
                 Icon(
-                    imageVector = vectorResource(Res.drawable.ellipse_135_icon),
+                    imageVector = vectorResource(Res.drawable.ic_pending),
                     contentDescription = null,
                     tint = Gray700,
                 )
 
             1 ->
                 Image(
-                    painter = painterResource(Res.drawable.insights_icon),
+                    painter = painterResource(Res.drawable.ic_ongoing),
                     contentDescription = null,
                 )
 
             2 ->
                 Box(modifier = Modifier.clip(CircleShape).background(color = Green)) {
                     Image(
-                        painter = painterResource(Res.drawable.insights_icon),
+                        painter = painterResource(Res.drawable.ic_completed),
                         contentDescription = null
                     )
                 }
         }
-    }
 
-    AppText(
-        text = stageName,
-        fontSize = 12.sp,
-        color = Gray700,
-        lineHeight = 14.4.sp
-    )
+        AppText(
+            text = stageName,
+            fontSize = 12.sp,
+            color = Gray700,
+            lineHeight = 14.4.sp
+        )
+    }
 }

@@ -1,10 +1,9 @@
 package org.example.mixedwashdummy.services
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
@@ -17,8 +16,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import org.example.mixedwashdummy.Service
 import org.example.mixedwashdummy.common.AppText
 import org.example.mixedwashdummy.common.AsyncImageLoader
@@ -38,10 +38,11 @@ fun ServiceTab(
 ) {
     Box(
         modifier = modifier.width(100.dp).clip(RoundedCornerShape(12.dp))
-            .background(if (isSelected) Gray900 else Color.Transparent),
+            .background(if (isSelected) Gray900 else Gray50)
     ) {
         Column(
-            modifier = Modifier.padding(12.dp),
+            modifier = Modifier.padding(6.dp),
+            verticalArrangement = Arrangement.spacedBy(10.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Box {
@@ -57,25 +58,30 @@ fun ServiceTab(
                 }
 
                 if (isTaken) {
+
                     Box(
                         modifier = Modifier.clip(CircleShape)
-                            .background(if (isSelected) Gray50 else Green)
+                            .background(if (isSelected) Gray900 else Gray50)
                             .align(Alignment.BottomEnd)
                     ) {
-                        Icon(
-                            imageVector = Icons.Outlined.Done,
-                            contentDescription = null,
-                            modifier = Modifier.padding(4.dp).size(16.dp)
-                        )
+                        Box(modifier = Modifier.padding(4.dp).clip(CircleShape).background(Green)) {
+                            Icon(
+                                imageVector = Icons.Outlined.Done,
+                                contentDescription = null,
+                                tint = Gray50,
+                                modifier = Modifier.padding(2.dp).size(16.dp).clip(CircleShape)
+                            )
+                        }
                     }
                 }
             }
 
-            Spacer(modifier = Modifier.height(20.dp))
-
             AppText(
                 text = service.title,
                 color = if (isSelected) Gray300 else Gray700,
+                lineHeight = 16.sp,
+                fontSize = 12.sp,
+                fontWeight = FontWeight.Medium
             )
         }
     }

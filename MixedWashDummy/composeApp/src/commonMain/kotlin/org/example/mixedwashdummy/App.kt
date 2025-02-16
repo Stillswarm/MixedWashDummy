@@ -4,7 +4,7 @@ import androidx.compose.foundation.background
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import org.example.mixedwashdummy.history.OrderHistoryScreen
+import org.example.mixedwashdummy.home.HomeScreen
 import org.example.mixedwashdummy.theme.Gray50
 import org.example.mixedwashdummy.theme.Poppins
 import org.jetbrains.compose.ui.tooling.preview.Preview
@@ -32,10 +32,10 @@ fun App() {
     MaterialTheme(
         typography = customTypography
     ) {
-        OrderHistoryScreen(
+        HomeScreen(
 //            services = DummyData.services,
 //            current = 1,
-            insightMetrics = DummyData.insightMetrics,
+//            insightMetrics = DummyData.insightMetrics,
             modifier = Modifier.background(Gray50)
         )
     }
