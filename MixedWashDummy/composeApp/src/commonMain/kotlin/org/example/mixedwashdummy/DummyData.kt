@@ -2,9 +2,9 @@ package org.example.mixedwashdummy
 
 import androidx.compose.ui.graphics.Color
 import mixedwashdummy.composeapp.generated.resources.Res
-import mixedwashdummy.composeapp.generated.resources.hourglass_icon
-import mixedwashdummy.composeapp.generated.resources.machine_icon
-import mixedwashdummy.composeapp.generated.resources.water_drop_icon
+import mixedwashdummy.composeapp.generated.resources.ic_hourglass
+import mixedwashdummy.composeapp.generated.resources.ic_washing_machine
+import mixedwashdummy.composeapp.generated.resources.ic_water_drop
 import org.example.mixedwashdummy.theme.Gray400
 import org.example.mixedwashdummy.theme.Gray500
 import org.example.mixedwashdummy.theme.Gray600
@@ -30,9 +30,9 @@ object DummyData {
     )
 
     val insightMetrics = listOf(
-        InsightMetric("time saved", "hrs", Res.drawable.hourglass_icon),
-        InsightMetric("washed", "kgs", Res.drawable.machine_icon),
-        InsightMetric("water saved", "ltr", Res.drawable.water_drop_icon),
+        InsightMetric("time saved", "hrs", Res.drawable.ic_hourglass),
+        InsightMetric("washed", "kgs", Res.drawable.ic_washing_machine),
+        InsightMetric("water saved", "ltr", Res.drawable.ic_water_drop),
     )
 }
 

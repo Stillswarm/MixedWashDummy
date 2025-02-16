@@ -1,28 +1,30 @@
 package org.example.mixedwashdummy.history
 
-import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.defaultMinSize
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Card
-import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import org.example.mixedwashdummy.common.AppText
 import org.example.mixedwashdummy.theme.Gray200
 import org.example.mixedwashdummy.theme.Gray400
 import org.jetbrains.compose.resources.DrawableResource
-import org.jetbrains.compose.resources.painterResource
+import org.jetbrains.compose.resources.vectorResource
 
 @Composable
 fun StatisticCard(
@@ -32,38 +34,51 @@ fun StatisticCard(
     icon: DrawableResource,
     modifier: Modifier = Modifier
 ) {
-    Card(
-        modifier = modifier.width(130.dp).height(110.dp),
-        shape = RoundedCornerShape(12.dp),
-        backgroundColor = Gray200
+    Box(
+        modifier = Modifier
+            .defaultMinSize(minWidth = 130.dp, minHeight = 110.dp)
+            .clip(RoundedCornerShape(12.dp))
+            .background(Gray200)
     ) {
 
-        Column(modifier = Modifier.fillMaxWidth().padding(16.dp)) {
+        Column(
+            modifier = modifier.matchParentSize()
+                .padding(start = 16.dp, top = 22.dp, end = 16.dp, bottom = 18.dp)
+        ) {
 
             AppText(
+                modifier = Modifier.fillMaxWidth(),
                 text = value.toString(),
-                style = MaterialTheme.typography.h4
+                fontSize = 24.sp,
+                fontWeight = FontWeight.Medium,
+                lineHeight = 26.sp
             )
 
-            Spacer(Modifier.height(8.dp))
-
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceBetween,
-                verticalAlignment = Alignment.CenterVertically
+            Box(
+                modifier = Modifier.fillMaxSize(),
+                contentAlignment = Alignment.BottomEnd
             ) {
-                    Image(
-                        painter = painterResource(icon),
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Icon(
+                        imageVector = vectorResource(icon),
                         contentDescription = null,
-                        modifier = Modifier.size(16.dp),
-                        colorFilter = ColorFilter.tint(color = Gray400)
+                        modifier = Modifier.height(14.dp),
+                        tint = Gray400
                     )
 
                     AppText(
-                        text = "$metric \n• $unit",
+                        text = "$metric\n• $unit",
                         color = Gray400,
-                        style = MaterialTheme.typography.caption
+                        fontSize = 12.sp,
+                        fontWeight = FontWeight.Medium,
+                        lineHeight = 14.sp,
+                        textAlign = TextAlign.End
                     )
+                }
             }
         }
     }

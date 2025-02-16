@@ -28,8 +28,9 @@
                         </option>
                         <option name="values">
                           <map>
-                            <entry key="outputName" value="history_icon" />
-                            <entry key="sourceFile" value="C:\Users\abhi5\AndroidStudioProjects\kmp\MixedWashDummy" />
+                            <entry key="assetSourceType" value="FILE" />
+                            <entry key="outputName" value="ic_hourglass" />
+                            <entry key="sourceFile" value="C:\Users\abhi5\Downloads\Vector (3).svg" />
                           </map>
                         </option>
                       </PersistentState>
