@@ -1,26 +1,28 @@
 package org.example.mixedwashdummy.home
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Button
-import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.Card
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import org.example.mixedwashdummy.common.AppButton
+import org.example.mixedwashdummy.common.AppText
 import org.example.mixedwashdummy.common.AsyncImageLoader
 import org.example.mixedwashdummy.theme.Gray100
 import org.example.mixedwashdummy.theme.Gray400
-import org.example.mixedwashdummy.theme.Gray700
 import org.example.mixedwashdummy.theme.Gray800
 import org.example.mixedwashdummy.theme.Gray900
 import org.example.mixedwashdummy.util.dropShadow
@@ -42,26 +44,33 @@ fun OfferCard(
     ) {
         Box(
             modifier = Modifier.gradient(colorStops = arrayOf(Pair(0f, Gray800), Pair(1f, Gray900)))
-                .padding(16.dp)
+                .padding(horizontal = 32.dp, vertical = 20.dp)
         ) {
-
             Row(
-                modifier = Modifier.fillMaxWidth().padding(16.dp),
-                verticalAlignment = Alignment.CenterVertically
+                modifier = Modifier.fillMaxWidth(),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.spacedBy(16.dp)
             ) {
-                Column(modifier = Modifier.weight(1f)) {
-                    Text(
+                Column(
+                    modifier = Modifier.weight(1f),
+                    verticalArrangement = Arrangement.spacedBy(12.dp)
+                ) {
+                    AppText(
                         text = details,
+                        fontSize = 13.sp,
+                        lineHeight = 16.sp,
                         color = Gray100
                     )
 
-                    Button(
+                    AppButton(
+                        contentPadding = PaddingValues(14.dp, 6.dp),
                         onClick = onButtonClick,
+                        fontSize = 12.sp,
+                        fontWeight = FontWeight.Medium,
                         shape = RoundedCornerShape(6.dp),
-                        colors = ButtonDefaults.buttonColors(backgroundColor = Gray100)
-                    ) {
-                        Text(text = buttonLabel, color = Gray700)
-                    }
+                        backgroundColor = Gray100,
+                        buttonTitle = buttonLabel
+                    )
                 }
 
                 AsyncImageLoader(

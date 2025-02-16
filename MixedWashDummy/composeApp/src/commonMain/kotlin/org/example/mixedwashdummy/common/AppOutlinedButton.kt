@@ -1,6 +1,8 @@
 package org.example.mixedwashdummy.common
 
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.indication
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.MaterialTheme
@@ -28,12 +30,14 @@ fun AppOutlinedButton(
     fontSize: TextUnit = TextUnit.Unspecified,
     fontWeight: FontWeight = FontWeight.Normal,
     lineHeight: TextUnit = TextUnit.Unspecified,
+    interactionSource: MutableInteractionSource = MutableInteractionSource(),
 ) {
     TextButton(
         modifier = modifier,
         contentPadding = contentPadding,
         onClick = onClick,
         shape = shape,
+        interactionSource = interactionSource,
         border = BorderStroke(1.dp, borderColor),
     ) {
         AppText(
@@ -43,6 +47,10 @@ fun AppOutlinedButton(
             fontWeight = fontWeight,
             fontSize = fontSize,
             lineHeight = lineHeight,
+            modifier = Modifier.indication(
+                interactionSource = interactionSource,
+                indication = null
+            ),
         )
     }
 }

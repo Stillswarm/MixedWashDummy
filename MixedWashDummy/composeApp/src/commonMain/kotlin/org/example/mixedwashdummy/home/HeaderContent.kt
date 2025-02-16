@@ -8,7 +8,6 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
@@ -30,26 +29,24 @@ fun HeaderContent(
 ) {
 
     Row(modifier = modifier.fillMaxWidth()) {
-        Box {
+        Box(modifier = Modifier.height(276.dp)) {
             AsyncImageLoader(
                 imageUrl = dataItem.imageUrl,
-                modifier = Modifier.height(160.dp)
-                            .align(Alignment.BottomStart)
-                            .offset(y = 52.dp),
+                modifier = Modifier.height(160.dp).width(200.dp)
+                    .align(Alignment.BottomStart).offset(y = 6.dp),
                 contentDescription = dataItem.heading,
             )
         }
 
         Column(
-            modifier = Modifier.padding(horizontal = 16.dp, vertical = 30.5.dp).width(189.dp),
+            modifier = Modifier.width(189.dp),
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
             AppText(
                 text = dataItem.heading,
                 color = dataItem.textColor,
                 fontWeight = FontWeight.Medium,
-                fontSize = 24.sp,
-                lineHeight = 18.sp
+                fontSize = 18.sp,
             )
 
             AppText(

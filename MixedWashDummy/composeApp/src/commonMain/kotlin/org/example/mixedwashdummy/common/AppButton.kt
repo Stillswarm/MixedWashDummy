@@ -3,7 +3,7 @@ package org.example.mixedwashdummy.common
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.indication
 import androidx.compose.foundation.interaction.MutableInteractionSource
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
@@ -14,7 +14,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import org.example.mixedwashdummy.theme.Gray100
@@ -34,7 +33,7 @@ fun AppButton(
     lineHeight: TextUnit = TextUnit.Unspecified,
     interactionSource: MutableInteractionSource = MutableInteractionSource(),
     backgroundColor: Color = Gray100,
-    contentPadding: Dp = 0.dp
+    contentPadding: PaddingValues = PaddingValues(0.dp)
 ) {
     Button(
         modifier = modifier,
@@ -42,13 +41,14 @@ fun AppButton(
         shape = shape,
         border = BorderStroke(1.dp, borderColor),
         interactionSource = interactionSource,
-        colors = ButtonDefaults.buttonColors(backgroundColor = backgroundColor)
+        colors = ButtonDefaults.buttonColors(backgroundColor = backgroundColor),
+        contentPadding = contentPadding
     ) {
         AppText(
             text = buttonTitle,
             color = titleColor,
             style = textStyle,
-            modifier = Modifier.padding(contentPadding).indication(
+            modifier = Modifier.indication(
                 interactionSource = interactionSource,
                 indication = null
             ),

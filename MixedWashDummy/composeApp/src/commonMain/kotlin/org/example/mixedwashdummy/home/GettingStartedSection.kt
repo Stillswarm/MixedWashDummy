@@ -1,30 +1,32 @@
 package org.example.mixedwashdummy.home
 
-import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Button
-import androidx.compose.material.ButtonDefaults
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.OutlinedButton
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import mixedwashdummy.composeapp.generated.resources.Res
 import mixedwashdummy.composeapp.generated.resources.image1
+import org.example.mixedwashdummy.common.AppButton
+import org.example.mixedwashdummy.common.AppOutlinedButton
+import org.example.mixedwashdummy.common.AppText
 import org.example.mixedwashdummy.theme.Gray100
 import org.example.mixedwashdummy.theme.Gray700
+import org.example.mixedwashdummy.theme.Gray800
 import org.jetbrains.compose.resources.painterResource
 
 @Composable
@@ -38,46 +40,58 @@ fun GettingStartedSection(
         modifier = modifier.fillMaxWidth(),
         contentAlignment = Alignment.Center
     ) {
-        Row {
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.spacedBy(12.dp),
+            modifier = Modifier.fillMaxWidth().padding(horizontal = 32.dp, vertical = 18.dp)
+        ) {
             Image(
                 painter = painterResource(Res.drawable.image1),
                 modifier = Modifier.width(106.dp).height(110.dp),
+                contentScale = ContentScale.Fit,
                 contentDescription = null
             )
 
             Column(
-                modifier = Modifier.padding(18.dp),
                 verticalArrangement = Arrangement.spacedBy(12.dp)
             ) {
-                Text(
+                AppText(
                     text = "Getting Started?",
                     color = textColor,
-                    style = MaterialTheme.typography.h6,
+                    lineHeight = 16.sp,
+                    fontSize = 16.sp,
+                    fontWeight = FontWeight.Medium
                 )
 
-                Text(
+                AppText(
                     text = "See how MixedWash works and learn more about our services.",
                     color = textColor,
+                    lineHeight = 16.sp,
+                    fontSize = 12.sp,
+                    fontWeight = FontWeight.Light
                 )
 
-                Row(horizontalArrangement = Arrangement.spacedBy(16.dp)) {
-                    OutlinedButton(
+                Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                    AppOutlinedButton(
+                        buttonTitle = "Call Us",
+                        contentPadding = PaddingValues(horizontal = 14.dp, vertical = 6.dp),
+                        shape = RoundedCornerShape(6.dp),
                         onClick = onCall,
-                        modifier = Modifier.weight(1f),
-                        shape = RoundedCornerShape(8.dp),
-                        border = BorderStroke(2.dp, Gray700)
-                    ) {
-                        Text(text = "Call Us", color = Gray700)
-                    }
+                        borderColor = Gray700,
+                        fontSize = 12.sp
 
-                    Button(
+                    )
+
+                    AppButton(
+                        buttonTitle = "Explore",
+                        fontWeight = FontWeight.Medium,
+                        titleColor = Gray100,
+                        fontSize = 12.sp,
                         onClick = onExplore,
-                        modifier = Modifier.weight(1f),
-                        shape = RoundedCornerShape(8.dp),
-                        colors = ButtonDefaults.buttonColors(backgroundColor = Gray700)
-                    ) {
-                        Text(text = "Explore", color = Gray100)
-                    }
+                        backgroundColor = Gray800,
+                        contentPadding = PaddingValues(horizontal = 14.dp, vertical = 6.dp),
+                        shape = RoundedCornerShape(6.dp),
+                    )
                 }
             }
         }

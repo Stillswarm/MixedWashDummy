@@ -2,12 +2,12 @@ package org.example.mixedwashdummy.home
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import org.example.mixedwashdummy.HomeHeaderData
-import org.example.mixedwashdummy.util.edgePadding
 import org.example.mixedwashdummy.util.gradient
 
 @Composable
@@ -17,11 +17,10 @@ fun HomeScreenHeader(
     modifier: Modifier = Modifier
 ) {
 
-    // todo: fix padding values and sizes for the header
-    val item = headerData[1]    // TODO: find ways to show diff. items at diff. times
-    Box {
+    val item = headerData[0]    // TODO: find ways to show diff. items at diff. times
+    Box(modifier = Modifier.height(276.dp)) {
         Box(
-            modifier = modifier.fillMaxWidth()
+            modifier = modifier.matchParentSize()
                 .gradient(
                     colorStops = arrayOf(
                         Pair(0f, item.gradientLight),
@@ -31,10 +30,7 @@ fun HomeScreenHeader(
         )
 
         Column(
-            modifier = Modifier.edgePadding(
-                extraHorizontal = 16.dp,
-                extraVertical = 16.dp
-            )
+            modifier = Modifier
         ) {
             HomeTopBar(
                 addressKey = "Home",
@@ -46,6 +42,7 @@ fun HomeScreenHeader(
             )
 
             HeaderContent(
+                modifier = Modifier.padding(top = 30.5.dp),
                 dataItem = item,
                 onButtonClick = onButtonClick
             )
