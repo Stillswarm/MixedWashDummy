@@ -36,22 +36,22 @@ fun AppButton(
     contentPadding: PaddingValues = PaddingValues(0.dp)
 ) {
     Button(
-        modifier = modifier,
+        modifier = modifier.indication(
+            interactionSource = interactionSource,
+            indication = null
+        ),
         onClick = onClick,
         shape = shape,
         border = BorderStroke(1.dp, borderColor),
         interactionSource = interactionSource,
         colors = ButtonDefaults.buttonColors(backgroundColor = backgroundColor),
-        contentPadding = contentPadding
-    ) {
+        contentPadding = contentPadding,
+
+        ) {
         AppText(
             text = buttonTitle,
             color = titleColor,
             style = textStyle,
-            modifier = Modifier.indication(
-                interactionSource = interactionSource,
-                indication = null
-            ),
             fontWeight = fontWeight,
             fontSize = fontSize,
             lineHeight = lineHeight,

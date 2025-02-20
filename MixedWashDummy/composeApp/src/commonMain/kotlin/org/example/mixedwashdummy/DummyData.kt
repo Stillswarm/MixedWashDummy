@@ -5,6 +5,9 @@ import mixedwashdummy.composeapp.generated.resources.Res
 import mixedwashdummy.composeapp.generated.resources.ic_hourglass
 import mixedwashdummy.composeapp.generated.resources.ic_washing_machine
 import mixedwashdummy.composeapp.generated.resources.ic_water_drop
+import mixedwashdummy.composeapp.generated.resources.onboarding_image1
+import mixedwashdummy.composeapp.generated.resources.onboarding_image2
+import mixedwashdummy.composeapp.generated.resources.onboarding_image3
 import org.example.mixedwashdummy.theme.Gray400
 import org.example.mixedwashdummy.theme.Gray500
 import org.example.mixedwashdummy.theme.Gray600
@@ -34,6 +37,12 @@ object DummyData {
         InsightMetric("washed", "kgs", Res.drawable.ic_washing_machine),
         InsightMetric("water saved", "ltr", Res.drawable.ic_water_drop),
     )
+
+    val onboardingData = listOf(
+        OnboardingData("Fresh clothes, just a few clicks away", "Say goodbye to laundry day stress. Book, track, and relax!", Res.drawable.onboarding_image1),
+        OnboardingData("24-Hour Turnaround", "We value your time. Fresh, clean clothes delivered to your doorstep within 24 hours.", Res.drawable.onboarding_image2),
+        OnboardingData("Pickup and Delivery at Your Doorstep", "Schedule a pickup and we'll handle the rest. Clean clothes delivered, hassle-free", Res.drawable.onboarding_image3),
+    )
 }
 
 data class Service(
@@ -57,4 +66,10 @@ data class InsightMetric(
     val metric: String,
     val unit: String,
     val icon: DrawableResource
+)
+
+data class OnboardingData(
+    val title: String,
+    val subtitle: String,
+    val imageResource: DrawableResource
 )

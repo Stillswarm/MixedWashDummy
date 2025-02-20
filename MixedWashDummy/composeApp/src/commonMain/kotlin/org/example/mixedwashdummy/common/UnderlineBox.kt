@@ -9,7 +9,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun UnderlineBox(lineColor: Color = Color.Unspecified, content: @Composable () -> Unit) {
+fun UnderlineBox(lineColor: Color = Color.Unspecified, modifier: Modifier = Modifier, content: @Composable () -> Unit) {
     Box(modifier = Modifier.drawBehind {
         val strokeWidth = 1.dp.toPx()  // Line thickness
         val y = size.height - strokeWidth / 2  // Position at the bottom edge

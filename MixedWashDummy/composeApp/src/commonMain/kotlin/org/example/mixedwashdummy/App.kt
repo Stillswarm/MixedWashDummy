@@ -4,7 +4,7 @@ import androidx.compose.foundation.background
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import org.example.mixedwashdummy.home.HomeScreen
+import org.example.mixedwashdummy.onboarding.OnboardingScreen
 import org.example.mixedwashdummy.theme.Gray50
 import org.example.mixedwashdummy.theme.Poppins
 import org.jetbrains.compose.ui.tooling.preview.Preview
@@ -30,15 +30,15 @@ fun App(onScroll: (Boolean) -> Unit) {
         )
     }
 
-
     MaterialTheme(
         typography = customTypography
     ) {
-        HomeScreen(
+        OnboardingScreen(
+            onboardingData = DummyData.onboardingData,
 //            services = DummyData.services,
 //            current = 1,
 //            insightMetrics = DummyData.insightMetrics,
-            onScroll = onScroll,
+//            onScroll = onScroll,
             modifier = Modifier.background(Gray50)
         )
     }
