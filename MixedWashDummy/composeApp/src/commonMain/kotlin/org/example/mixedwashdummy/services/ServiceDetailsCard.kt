@@ -7,18 +7,24 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.Button
+import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.Divider
 import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
-import androidx.compose.material.TextButton
+import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.outlined.Delete
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -45,34 +51,33 @@ import org.jetbrains.compose.resources.vectorResource
 @Composable
 fun ServiceDetailsCard(
     service: Service,
-    expTime: Int, /* expected time */
-    pricing: Int,
-    minCart: Int,
-    washTempMin: Int,
-    washTempMax: Int,
-    detergent: String,
-    drying: String,
-    onSelect: () -> Unit,
-    onAdd: () -> Unit,
-    onRemove: () -> Unit,
-    modifier: Modifier = Modifier
+    onEvent: (ServicesScreenEvent) -> Unit,
+    mixedMode: Boolean,
+    modifier: Modifier = Modifier,
+    isOpted: Boolean,
 ) {
     Box(
         modifier = modifier.clip(RoundedCornerShape(18.dp)).background(Gray100)
     ) {
+
+        // side image
         AsyncImageLoader(
             imageUrl = service.imageUrl,
             modifier = Modifier.size(180.dp).align(Alignment.TopEnd).offset(x = 100.dp, y = 50.dp)
         )
 
         Column(
-            modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 32.dp),
+            modifier = Modifier.fillMaxWidth()
+                .padding(horizontal = 16.dp, vertical = 32.dp)
+                .verticalScroll(rememberScrollState()),
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
             Column(
                 modifier = Modifier.width(181.dp),
                 verticalArrangement = Arrangement.spacedBy(18.dp)
             ) {
+
+                // title
                 AppText(
                     text = service.title,
                     fontWeight = FontWeight.Medium,
@@ -84,19 +89,21 @@ fun ServiceDetailsCard(
                     verticalAlignment = Alignment.CenterVertically,
                     horizontalArrangement = Arrangement.spacedBy(4.dp)
                 ) {
+                    // duration
                     Icon(
                         imageVector = vectorResource(Res.drawable.ic_history),
                         contentDescription = null
                     )
 
                     AppText(
-                        text = "$expTime hrs",
+                        text = "${service.deliveryTimeMinInHrs} hrs",
                         fontSize = 14.sp,
                         lineHeight = 16.8.sp,
                         fontWeight = FontWeight.Medium
                     )
                 }
 
+                // description
                 AppText(
                     text = service.description,
                     color = Gray500,
@@ -104,6 +111,7 @@ fun ServiceDetailsCard(
                     lineHeight = 16.8.sp,
                 )
 
+                // pricing
                 Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
                     AppText(
                         text = "pricing",
@@ -112,94 +120,126 @@ fun ServiceDetailsCard(
                         lineHeight = 16.8.sp
                     )
 
-                    AppText(
-                        text = "₹$pricing /kg",
-                        color = Gray800,
-                        fontSize = 14.sp,
-                        fontWeight = FontWeight.Medium,
-                        lineHeight = 16.8.sp
-                    )
+                    // price per pair
 
-                    AppText(
-                        text = "minimum cart",
-                        color = Gray500,
-                        fontSize = 12.sp,
-                        lineHeight = 16.8.sp
-                    )
+                    if (service.pricePerPair != null) {
+                        AppText(
+                            text = "₹${service.pricePerPair} /pair",
+                            color = Gray800,
+                            fontSize = 14.sp,
+                            fontWeight = FontWeight.Medium,
+                            lineHeight = 16.8.sp
+                        )
+                    }
 
-                    AppText(
-                        text = "₹$minCart (4kg)",
-                        color = Gray800,
-                        fontSize = 14.sp,
-                        lineHeight = 14.sp,
-                        fontWeight = FontWeight.Medium
-                    )
+                    // price per kg
+                    if (service.pricePerKg != null) {
+                        AppText(
+                            text = "₹${service.pricePerKg} /kg",
+                            color = Gray800,
+                            fontSize = 14.sp,
+                            fontWeight = FontWeight.Medium,
+                            lineHeight = 16.8.sp
+                        )
+                    }
+
+                    if (service.minCartMixedInKg != null) {
+                        AppText(
+                            text = "minimum cart",
+                            color = Gray500,
+                            fontSize = 12.sp,
+                            lineHeight = 16.8.sp
+                        )
+
+                        AppText(
+                            text = "₹${
+                                    if (mixedMode) service.minCartMixedInKg.times((service.pricePerKg ?: 1)) 
+                                    else service.minCartSegregatedInKg?.times((service.pricePerKg ?: 1))} " +
+                                    "(${if (mixedMode) service.minCartMixedInKg else service.minCartSegregatedInKg}kg)",
+                            color = Gray800,
+                            fontSize = 14.sp,
+                            lineHeight = 14.sp,
+                            fontWeight = FontWeight.Medium
+                        )
+                    }
                 }
             }
 
-            Column(modifier = Modifier.width(200.dp)) {
-                AppText(
-                    text = "your whites and colored items will be washed together and tumble dried",
-                    lineHeight = 16.8.sp,
-                    fontSize = 12.sp,
-                )
-
-                Row(
-                    horizontalArrangement = Arrangement.spacedBy(8.dp),
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    AppOutlinedButton(
-                        buttonTitle = "Mixed",
-                        onClick = {}, shape = RoundedCornerShape(12.dp),
-                        borderColor = Gray800,
-                        letterSpacing = (-0.02).sp,
-                        contentPadding = PaddingValues(horizontal = 16.dp, vertical = 10.dp),
+            // mixed and segregated
+            if (service.minCartMixedInKg != null) {
+                Column(modifier = Modifier.width(200.dp)) {
+                    AppText(
+                        text = if (mixedMode) "your whites and colored items will be washed together and tumble dried"
+                        else "your whites & colored clothes are segregated and washed separately",
+                        lineHeight = 16.8.sp,
                         fontSize = 12.sp,
-                        fontWeight = FontWeight.Medium,
-                        lineHeight = 14.sp
                     )
 
-                    AppOutlinedButton(
-                        buttonTitle = "Segregated",
-                        borderColor = Color.Unspecified,
-                        letterSpacing = (-0.02).sp,
-                        onClick = {}, shape = RoundedCornerShape(12.dp),
-                        contentPadding = PaddingValues(vertical = 10.dp, horizontal = 16.dp),
-                        fontSize = 12.sp,
-                        fontWeight = FontWeight.Medium,
-                        lineHeight = 14.sp
-                    )
+
+                    Row(
+                        horizontalArrangement = Arrangement.spacedBy(8.dp),
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        AppOutlinedButton(
+                            buttonTitle = "Mixed",
+                            onClick = { onEvent(ServicesScreenEvent.ToggleMixedMode) },
+                            shape = RoundedCornerShape(12.dp),
+                            borderColor = if (mixedMode) Gray800 else Color.Unspecified,
+                            letterSpacing = (-0.02).sp,
+                            contentPadding = PaddingValues(horizontal = 16.dp, vertical = 10.dp),
+                            fontSize = 12.sp,
+                            fontWeight = FontWeight.Medium,
+                            lineHeight = 14.sp
+                        )
+
+                        AppOutlinedButton(
+                            buttonTitle = "Segregated",
+                            borderColor = if (!mixedMode) Gray800 else Color.Unspecified,
+                            letterSpacing = (-0.02).sp,
+                            onClick = { onEvent(ServicesScreenEvent.ToggleMixedMode) },
+                            shape = RoundedCornerShape(12.dp),
+                            contentPadding = PaddingValues(vertical = 10.dp, horizontal = 16.dp),
+                            fontSize = 12.sp,
+                            fontWeight = FontWeight.Medium,
+                            lineHeight = 14.sp
+                        )
+                    }
                 }
             }
 
-            TextButton(
-                onClick = {},
+            // add / remove
+            Button(
+                onClick = { onEvent(ServicesScreenEvent.ToggleOptedService(service.id)) },
                 shape = RoundedCornerShape(6.dp),
                 border = BorderStroke(1.dp, Gray800),
+                colors = ButtonDefaults.buttonColors(backgroundColor = if (isOpted) Gray50 else Gray800),
                 contentPadding = PaddingValues(horizontal = 14.dp, vertical = 8.dp)
             ) {
                 Row(
-                    modifier = Modifier.padding(4.dp),
+                    modifier = Modifier.background(if (!isOpted) Gray800 else Color.Unspecified)
+                        .padding(4.dp),
                     verticalAlignment = Alignment.CenterVertically,
                     horizontalArrangement = Arrangement.spacedBy(4.dp)
                 ) {
                     Icon(
-                        imageVector = Icons.Outlined.Delete,
+                        imageVector = if (isOpted) Icons.Outlined.Delete else Icons.Default.Add,
                         contentDescription = null,
-                        tint = Gray800,
+                        tint = if (isOpted) Gray800 else Gray100,
                         modifier = Modifier.size(18.dp)
                     )
 
-                    AppText(
-                        text = "Remove Item",
+                    Text(
+                        text = if (isOpted) "Remove Item" else "Add Item",
                         fontWeight = FontWeight.Medium,
-                        fontSize = 12.sp
+                        fontSize = 12.sp,
+                        color = if (isOpted) Gray800 else Gray100
                     )
                 }
             }
 
             Divider(color = dividerBlack, thickness = 1.5.dp)
 
+            // details
             AppText(
                 text = "Details",
                 fontWeight = FontWeight.Medium,
@@ -212,9 +252,9 @@ fun ServiceDetailsCard(
                 keys = listOf("Delivery time", "Wash temperature", "Detergent", "Drying"),
                 values = listOf(
                     "24 hrs",
-                    "$washTempMin° - $washTempMax°C",
-                    detergent,
-                    drying
+                    "30° - 35°C",
+                    "Eco Friendly",
+                    "Tumble Dry"
                 )
             )
         }

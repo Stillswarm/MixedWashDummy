@@ -17,11 +17,72 @@ import org.jetbrains.compose.resources.DrawableResource
 
 object DummyData {
     val services = listOf(
-        Service("Wash & Iron", "best for shirts, t-shirts, trousers, inner-wears & regular daily wears", "sku_wash_and_iron"),
-        Service("Wash & Fold", "best for shirts, t-shirts, trousers, inner-wears & regular daily wears", "sku_wash_and_fold"),
-        Service("Dry Clean", "best for shirts, t-shirts, trousers, inner-wears & regular daily wears", "sku_dry_clean"),
-        Service("Heavy Wash", "best for shirts, t-shirts, trousers, inner-wears & regular daily wears", "sku_heavy_wash"),
-        Service("Shoe Clean", "best for shirts, t-shirts, trousers, inner-wears & regular daily wears", "sku_shoe_clean"),
+        Service(
+            id = 0,
+            title = "Wash & Iron",
+            description = "best for shirts, t-shirts, trousers, and office wears",
+            imageUrl = "sku_wash_and_iron",
+            minCartMixedInKg = 3,
+            minCartSegregatedInKg = 6,
+            pricePerKg = 150,
+            inclusions = "You could include everyday laundry items like Shirts, Trousers, T-Shirts, Leggings, Regular wear kurtis and other items which can be machine washed and tumble dried.",
+            exclusions = "Blazers, Doormats, Sarees, Blouses, shoes, chappals, heavily embroided items, blankets and other bulky items. Also, do not include DRY CLEAN ONLY items and items that are not suitable for tumble dryer.",
+            deliveryTimeMinInHrs = 24,
+            deliveryTimeMaxInHrs = 24
+        ),
+        Service(
+            id = 1,
+            title = "Wash & Fold",
+            description = "best for shirts, t-shirts, trousers, inner-wears & regular daily wears",
+            imageUrl = "sku_wash_and_fold",
+            minCartMixedInKg = 4,
+            minCartSegregatedInKg = 8,
+            pricePerKg = 95,
+            inclusions = "You could include everyday laundry items like Shirts, Trousers, T-Shirts, Innerwear, Leggings, Regular wear kurtis and other items which can be machine washed and tumble dried. Apart from regular clothes you could also include a Bedsheet and 2-3 pillow covers in a 4 kg load",
+            exclusions = "Blazers, Doormats, Sarees, Blouses, shoes, chappals, heavily embroidered items, blankets and other bulky items. Also, do not include DRY CLEAN ONLY items and items that are not suitable for tumble dryer.",
+            deliveryTimeMinInHrs = 24,
+            deliveryTimeMaxInHrs = 24
+        ),
+        Service(
+            id = 2,
+            title = "Dry Clean",
+            description = "best for stained items and delicate garments",
+            imageUrl = "sku_dry_clean",
+            minCartMixedInKg = null,
+            minCartSegregatedInKg = null,
+            pricePerKg = 100,
+            inclusions = "todo",
+            exclusions = "todo",
+            deliveryTimeMinInHrs = 24,
+            deliveryTimeMaxInHrs = 48
+        ),
+        Service(
+            id = 3,
+            title = "Heavy Wash",
+            description = "best for blankets, towels, bedsheets & fabric mats",
+            imageUrl = "sku_heavy_wash",
+            minCartMixedInKg = 4,
+            minCartSegregatedInKg = 8,
+            pricePerKg = 140,
+            inclusions = "Bed Sheets, Blankets, Pillow Covers, Towels, Curtains and other bulky items.",
+            exclusions = "Blazers, Doormats, Sarees, Blouses, shoes, chappals, heavily embroided items. Also, do not include DRY CLEAN ONLY items and items that are not suitable for tumble dryer.",
+            deliveryTimeMinInHrs = 24,
+            deliveryTimeMaxInHrs = 48
+        ),
+        Service(
+            id = 4,
+            title = "Shoe Clean",
+            description = "best for sneakers, sports and casual shoes",
+            imageUrl = "sku_shoe_clean",
+            minCartMixedInKg = null,
+            minCartSegregatedInKg = null,
+            pricePerPair = 350,
+            pricePerKg = null,
+            inclusions = "Sneakers, Loafers, Sandals, Flip flops and Sports Shoes",
+            exclusions = "Any leather footwear",
+            deliveryTimeMinInHrs = 72,
+            deliveryTimeMaxInHrs = 72
+        ),
     )
 
     val headerData = listOf(
@@ -46,9 +107,18 @@ object DummyData {
 }
 
 data class Service(
+    val id: Int,
     val title: String,
     val description: String,
     val imageUrl: String,
+    val minCartMixedInKg: Int?,
+    val minCartSegregatedInKg: Int?,
+    val pricePerPair: Int? = null,
+    val pricePerKg: Int?,
+    val inclusions: String,
+    val exclusions: String,
+    val deliveryTimeMinInHrs: Int,
+    val deliveryTimeMaxInHrs: Int,
 )
 
 data class HomeHeaderData(

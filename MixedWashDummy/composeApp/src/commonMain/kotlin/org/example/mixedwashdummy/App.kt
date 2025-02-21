@@ -3,8 +3,12 @@ package org.example.mixedwashdummy
 import androidx.compose.foundation.background
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import org.example.mixedwashdummy.onboarding.OnboardingScreen
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import org.example.mixedwashdummy.services.ServicesScreen
+import org.example.mixedwashdummy.services.ServicesScreenViewModel
 import org.example.mixedwashdummy.theme.Gray50
 import org.example.mixedwashdummy.theme.Poppins
 import org.jetbrains.compose.ui.tooling.preview.Preview
@@ -33,12 +37,15 @@ fun App(onScroll: (Boolean) -> Unit) {
     MaterialTheme(
         typography = customTypography
     ) {
-        OnboardingScreen(
-            onboardingData = DummyData.onboardingData,
-//            services = DummyData.services,
-//            current = 1,
+        val viewModel = remember { ServicesScreenViewModel() }
+        val state by viewModel.uiState.collectAsStateWithLifecycle()
+        ServicesScreen(
+//            onboardingData = DummyData.onboardingData,
+            services = DummyData.services,
 //            insightMetrics = DummyData.insightMetrics,
 //            onScroll = onScroll,
+            state = state,
+            onEvent = viewModel::onEvent,
             modifier = Modifier.background(Gray50)
         )
     }

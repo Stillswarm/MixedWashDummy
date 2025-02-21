@@ -1,6 +1,7 @@
 package org.example.mixedwashdummy.services
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -32,13 +33,15 @@ import org.example.mixedwashdummy.theme.Green
 @Composable
 fun ServiceTab(
     service: Service,
-    isTaken: Boolean,
-    isSelected: Boolean,
+    isOpted: Boolean,
+    isCurrent: Boolean,
+    onClick: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Box(
         modifier = modifier.width(100.dp).clip(RoundedCornerShape(12.dp))
-            .background(if (isSelected) Gray900 else Gray50)
+            .background(if (isCurrent) Gray900 else Gray50)
+            .clickable { onClick() }
     ) {
         Column(
             modifier = Modifier.padding(6.dp),
@@ -48,7 +51,7 @@ fun ServiceTab(
             Box {
                 Box(
                     modifier = Modifier.clip(CircleShape)
-                        .background(if (isSelected) Gray700 else Gray100),
+                        .background(if (isCurrent) Gray700 else Gray100),
                     contentAlignment = Alignment.Center
                 ) {
                     AsyncImageLoader(
@@ -57,11 +60,11 @@ fun ServiceTab(
                     )
                 }
 
-                if (isTaken) {
+                if (isOpted) {
 
                     Box(
                         modifier = Modifier.clip(CircleShape)
-                            .background(if (isSelected) Gray900 else Gray50)
+                            .background(if (isCurrent) Gray900 else Gray50)
                             .align(Alignment.BottomEnd)
                     ) {
                         Box(modifier = Modifier.padding(4.dp).clip(CircleShape).background(Green)) {
@@ -78,7 +81,7 @@ fun ServiceTab(
 
             AppText(
                 text = service.title,
-                color = if (isSelected) Gray300 else Gray700,
+                color = if (isCurrent) Gray300 else Gray700,
                 lineHeight = 16.sp,
                 fontSize = 12.sp,
                 fontWeight = FontWeight.Medium

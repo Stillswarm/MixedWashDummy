@@ -1,5 +1,6 @@
 package org.example.mixedwashdummy.services
 
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
@@ -15,7 +16,12 @@ import org.example.mixedwashdummy.Service
 import org.example.mixedwashdummy.util.edgePadding
 
 @Composable
-fun ServicesScreen(services: List<Service>, current: Int, modifier: Modifier = Modifier) {
+fun ServicesScreen(
+    services: List<Service>,
+    state: ServicesScreenState,
+    onEvent: (ServicesScreenEvent) -> Unit,
+    modifier: Modifier = Modifier,
+) {
     Box(
         modifier = modifier.fillMaxSize()
             .edgePadding()
@@ -25,26 +31,20 @@ fun ServicesScreen(services: List<Service>, current: Int, modifier: Modifier = M
                 itemsIndexed(services) { index, item ->
                     ServiceTab(
                         service = item,
-                        isTaken = index <= 2,
-                        isSelected = index == current,
+                        isOpted = state.optedServices.contains(index),
+                        isCurrent = index == state.currentService,
+                        onClick = { onEvent(ServicesScreenEvent.ToggleCurrentService(index)) },
                         modifier = Modifier.padding(horizontal = 16.dp),
                     )
                 }
             }
 
             ServiceDetailsCard(
-                service = services[current],
-                expTime = 24,
-                pricing = 95,
-                minCart = 395,
-                washTempMin = 30,
-                washTempMax = 35,
-                detergent = "Eco Friendly",
-                drying = "Tumble Dry",
-                onSelect = {},
-                onAdd = {},
-                onRemove = {},
-                modifier = Modifier.weight(1f)
+                service = services[state.currentService],
+                onEvent = onEvent,
+                mixedMode = state.mixedMode,
+                modifier = Modifier.weight(1f),
+                isOpted = state.optedServices.contains(state.currentService)
             )
         }
 
