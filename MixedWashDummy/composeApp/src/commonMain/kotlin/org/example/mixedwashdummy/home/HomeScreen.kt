@@ -67,7 +67,7 @@ fun HomeScreen(onScroll: (Boolean) -> Unit, modifier: Modifier = Modifier) {
 
         // TODO: Replace Dummy with actual
         ServicesSection(
-            services = DummyData.services,
+            serviceItems = DummyData.services,
             onSeeAll = {},
             modifier = edgePadding
         )

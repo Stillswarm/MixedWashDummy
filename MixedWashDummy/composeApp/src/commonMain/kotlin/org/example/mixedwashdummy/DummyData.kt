@@ -1,6 +1,8 @@
 package org.example.mixedwashdummy
 
 import androidx.compose.ui.graphics.Color
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 import mixedwashdummy.composeapp.generated.resources.Res
 import mixedwashdummy.composeapp.generated.resources.ic_hourglass
 import mixedwashdummy.composeapp.generated.resources.ic_washing_machine
@@ -16,7 +18,7 @@ import org.example.mixedwashdummy.theme.Gray900
 import org.jetbrains.compose.resources.DrawableResource
 
 object DummyData {
-    val washAndIronService = Service(
+    val washAndIronServiceItem = ServiceItem(
         id = 0,
         title = "Wash & Iron",
         description = "best for shirts, t-shirts, trousers, and office wears",
@@ -24,13 +26,13 @@ object DummyData {
         minCartMixedInKg = 3,
         minCartSegregatedInKg = 6,
         pricePerKg = 150,
-        inclusions = "You could include everyday laundry items like Shirts, Trousers, T-Shirts, Leggings, Regular wear kurtis and other items which can be machine washed and tumble dried.",
-        exclusions = "Blazers, Doormats, Sarees, Blouses, shoes, chappals, heavily embroided items, blankets and other bulky items. Also, do not include DRY CLEAN ONLY items and items that are not suitable for tumble dryer.",
+        inclusions = "You could include everyday laundry items like shirts, trousers, t-shirts, leggings, regular wear kurtis and other items which can be machine washed and tumble dried.",
+        exclusions = "blazers, doormats, sarees, blouses, shoes, chappals, heavily embroidered items, blankets and other bulky items. Also, do not include DRY CLEAN ONLY items and items that are not suitable for tumble dryer.",
         deliveryTimeMinInHrs = 24,
         deliveryTimeMaxInHrs = 24
     )
 
-    val washAndFoldService = Service(
+    val washAndFoldServiceItem = ServiceItem(
         id = 1,
         title = "Wash & Fold",
         description = "best for shirts, t-shirts, trousers, inner-wears & regular daily wears",
@@ -44,7 +46,7 @@ object DummyData {
         deliveryTimeMaxInHrs = 24
     )
 
-    val dryClean = Service(
+    val dryClean = ServiceItem(
         id = 2,
         title = "Dry Clean",
         description = "best for stained items and delicate garments",
@@ -58,7 +60,7 @@ object DummyData {
         deliveryTimeMaxInHrs = 48
     )
 
-    val heavyWash = Service(
+    val heavyWash = ServiceItem(
         id = 3,
         title = "Heavy Wash",
         description = "best for blankets, towels, bedsheets & fabric mats",
@@ -67,12 +69,12 @@ object DummyData {
         minCartSegregatedInKg = 8,
         pricePerKg = 140,
         inclusions = "Bed Sheets, Blankets, Pillow Covers, Towels, Curtains and other bulky items.",
-        exclusions = "Blazers, Doormats, Sarees, Blouses, shoes, chappals, heavily embroided items. Also, do not include DRY CLEAN ONLY items and items that are not suitable for tumble dryer.",
+        exclusions = "Blazers, Doormats, Sarees, Blouses, shoes, chappals, heavily embroidered items. Also, do not include DRY CLEAN ONLY items and items that are not suitable for tumble dryer.",
         deliveryTimeMinInHrs = 24,
         deliveryTimeMaxInHrs = 48
     )
 
-    val shoeCleanService = Service(
+    val shoeCleanServiceItem = ServiceItem(
         id = 4,
         title = "Shoe Clean",
         description = "best for sneakers, sports and casual shoes",
@@ -87,13 +89,12 @@ object DummyData {
         deliveryTimeMaxInHrs = 72
     )
 
-
     val services = listOf(
-        washAndIronService,
-        washAndFoldService,
+        washAndIronServiceItem,
+        washAndFoldServiceItem,
         dryClean,
         heavyWash,
-        shoeCleanService,
+        shoeCleanServiceItem,
     )
 
     val headerData = listOf(
@@ -172,21 +173,21 @@ object DummyData {
     val orderHistoryMock = listOf(
         OrderHistoryData(
             orderId = 1022154,
-            services = listOf(washAndFoldService, dryClean, shoeCleanService),
+            serviceItems = listOf(washAndFoldServiceItem, dryClean, shoeCleanServiceItem),
             orderedTimestamp = 1708464000000L,
             deliveryTimestamp = 1708464000000L,
             price = 1024
         ),
         OrderHistoryData(
             orderId = 1024298,
-            services = listOf(washAndIronService, dryClean, heavyWash, washAndFoldService),
+            serviceItems = listOf(washAndIronServiceItem, dryClean, heavyWash, washAndFoldServiceItem),
             orderedTimestamp = 1708464000000L,
             deliveryTimestamp = null,
             price = 2048
         ),
         OrderHistoryData(
             orderId = 1000245,
-            services = listOf(washAndFoldService),
+            serviceItems = listOf(washAndFoldServiceItem),
             orderedTimestamp = 1708464000000L,
             deliveryTimestamp = 1808464000000L,
             price = 1024
@@ -194,18 +195,26 @@ object DummyData {
     )
 }
 
-data class Service(
+@Serializable
+data class ServiceItem(
     val id: Int,
     val title: String,
     val description: String,
+    @SerialName("image_url")
     val imageUrl: String,
+    @SerialName("min_cart_mixed_kg")
     val minCartMixedInKg: Int?,
+    @SerialName("min_cart_segregated_kg")
     val minCartSegregatedInKg: Int?,
+    @SerialName("price_per_pair")
     val pricePerPair: Int? = null,
+    @SerialName("price_per_kg")
     val pricePerKg: Int?,
     val inclusions: String,
     val exclusions: String,
+    @SerialName("delivery_time_min_hrs")
     val deliveryTimeMinInHrs: Int,
+    @SerialName("delivery_time_max_hrs")
     val deliveryTimeMaxInHrs: Int,
 )
 
@@ -232,10 +241,10 @@ data class OnboardingData(
     val imageResource: DrawableResource
 )
 
-// status is determined from whether the delivery timestamp is past, future or null
+// order status is determined from whether the delivery timestamp is past, future or null
 data class OrderHistoryData(
     val orderId: Long,
-    val services: List<Service>,
+    val serviceItems: List<ServiceItem>,
     val orderedTimestamp: Long,
     val deliveryTimestamp: Long?,   // null if the order was cancelled
     val price: Int,

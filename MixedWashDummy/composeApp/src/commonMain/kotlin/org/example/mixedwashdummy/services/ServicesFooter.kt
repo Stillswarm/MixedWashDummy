@@ -32,7 +32,12 @@ import org.example.mixedwashdummy.theme.Green
 import org.jetbrains.compose.resources.vectorResource
 
 @Composable
-fun ServicesFooter(modifier: Modifier = Modifier) {
+fun ServicesFooter(
+    selectedItemsSize: Int,
+    price: Int,
+    onProceed: () -> Unit,
+    modifier: Modifier = Modifier
+) {
     Column(
         modifier = modifier.fillMaxWidth()
             .padding(start = 22.dp, top = 0.dp, end = 16.dp, bottom = 4.dp)
@@ -55,7 +60,7 @@ fun ServicesFooter(modifier: Modifier = Modifier) {
 
                     Column {
                         AppText(
-                            text = "20% OFF 'FLAT20'' applied",
+                            text = "20% OFF 'FLAT20' applied",
                             lineHeight = 12.sp,
                             fontSize = 12.sp,
                             fontWeight = FontWeight.SemiBold,
@@ -77,7 +82,7 @@ fun ServicesFooter(modifier: Modifier = Modifier) {
 
                 Row {
                     AppText(
-                        text = "2 items | ₹502.00",
+                        text = "$selectedItemsSize items | ₹$price",
                         color = Gray900,
                         fontSize = 14.sp,
                         lineHeight = 16.sp,
@@ -93,7 +98,7 @@ fun ServicesFooter(modifier: Modifier = Modifier) {
             }
 
             AppButton(
-                onClick = {},
+                onClick = onProceed,
                 buttonTitle = "Proceed",
                 shape = RoundedCornerShape(6.dp),
                 contentPadding = PaddingValues(horizontal = 26.dp, 12.dp),

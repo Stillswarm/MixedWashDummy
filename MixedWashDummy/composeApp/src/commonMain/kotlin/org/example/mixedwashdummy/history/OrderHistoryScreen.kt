@@ -51,7 +51,7 @@ fun OrderHistoryScreen(state: OrderHistoryState, modifier: Modifier = Modifier) 
             Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
                 OrderSummaryCard(
                     orderId = order.orderId,
-                    titles = order.services.map { it.title },
+                    titles = order.serviceItems.map { it.title },
                     ordered = DateTimeUtils.formatTimestamp(order.orderedTimestamp),
                     delivery = if (order.deliveryTimestamp != null) DateTimeUtils.formatTimestamp(
                         order.deliveryTimestamp

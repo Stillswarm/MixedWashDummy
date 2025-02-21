@@ -20,7 +20,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import org.example.mixedwashdummy.Service
+import org.example.mixedwashdummy.ServiceItem
 import org.example.mixedwashdummy.common.AppText
 import org.example.mixedwashdummy.common.AsyncImageLoader
 import org.example.mixedwashdummy.theme.Gray100
@@ -32,7 +32,7 @@ import org.example.mixedwashdummy.theme.Green
 
 @Composable
 fun ServiceTab(
-    service: Service,
+    serviceItem: ServiceItem,
     isOpted: Boolean,
     isCurrent: Boolean,
     onClick: () -> Unit,
@@ -55,7 +55,7 @@ fun ServiceTab(
                     contentAlignment = Alignment.Center
                 ) {
                     AsyncImageLoader(
-                        imageUrl = service.imageUrl,
+                        imageUrl = serviceItem.imageUrl,
                         modifier = Modifier.padding(14.dp)
                     )
                 }
@@ -80,7 +80,7 @@ fun ServiceTab(
             }
 
             AppText(
-                text = service.title,
+                text = serviceItem.title,
                 color = if (isCurrent) Gray300 else Gray700,
                 lineHeight = 16.sp,
                 fontSize = 12.sp,

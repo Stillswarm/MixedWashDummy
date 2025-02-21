@@ -36,7 +36,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import mixedwashdummy.composeapp.generated.resources.Res
 import mixedwashdummy.composeapp.generated.resources.ic_history
-import org.example.mixedwashdummy.Service
+import org.example.mixedwashdummy.ServiceItem
 import org.example.mixedwashdummy.common.AppOutlinedButton
 import org.example.mixedwashdummy.common.AppText
 import org.example.mixedwashdummy.common.AsyncImageLoader
@@ -47,9 +47,10 @@ import org.example.mixedwashdummy.theme.Gray800
 import org.example.mixedwashdummy.theme.dividerBlack
 import org.jetbrains.compose.resources.vectorResource
 
+
 @Composable
 fun ServiceDetailsCard(
-    service: Service,
+    serviceItem: ServiceItem,
     onEvent: (ServicesScreenEvent) -> Unit,
     mixedMode: Boolean,
     modifier: Modifier = Modifier,
@@ -61,7 +62,7 @@ fun ServiceDetailsCard(
 
         // side image
         AsyncImageLoader(
-            imageUrl = service.imageUrl,
+            imageUrl = serviceItem.imageUrl,
             modifier = Modifier.size(180.dp).align(Alignment.TopEnd).offset(x = 100.dp, y = 50.dp)
         )
 
@@ -78,7 +79,7 @@ fun ServiceDetailsCard(
 
                 // title
                 AppText(
-                    text = service.title,
+                    text = serviceItem.title,
                     fontWeight = FontWeight.Medium,
                     fontSize = 24.sp,
                     lineHeight = 31.2.sp
@@ -95,7 +96,7 @@ fun ServiceDetailsCard(
                     )
 
                     AppText(
-                        text = "${service.deliveryTimeMinInHrs} hrs",
+                        text = "${serviceItem.deliveryTimeMinInHrs} hrs",
                         fontSize = 14.sp,
                         lineHeight = 16.8.sp,
                         fontWeight = FontWeight.Medium
@@ -104,7 +105,7 @@ fun ServiceDetailsCard(
 
                 // description
                 AppText(
-                    text = service.description,
+                    text = serviceItem.description,
                     color = Gray500,
                     fontSize = 14.sp,
                     lineHeight = 16.8.sp,
@@ -121,9 +122,9 @@ fun ServiceDetailsCard(
 
                     // price per pair
 
-                    if (service.pricePerPair != null) {
+                    if (serviceItem.pricePerPair != null) {
                         AppText(
-                            text = "₹${service.pricePerPair} /pair",
+                            text = "₹${serviceItem.pricePerPair} /pair",
                             color = Gray800,
                             fontSize = 14.sp,
                             fontWeight = FontWeight.Medium,
@@ -132,9 +133,9 @@ fun ServiceDetailsCard(
                     }
 
                     // price per kg
-                    if (service.pricePerKg != null) {
+                    if (serviceItem.pricePerKg != null) {
                         AppText(
-                            text = "₹${service.pricePerKg} /kg",
+                            text = "₹${serviceItem.pricePerKg} /kg",
                             color = Gray800,
                             fontSize = 14.sp,
                             fontWeight = FontWeight.Medium,
@@ -142,7 +143,7 @@ fun ServiceDetailsCard(
                         )
                     }
 
-                    if (service.minCartMixedInKg != null) {
+                    if (serviceItem.minCartMixedInKg != null) {
                         AppText(
                             text = "minimum cart",
                             color = Gray500,
@@ -152,9 +153,9 @@ fun ServiceDetailsCard(
 
                         AppText(
                             text = "₹${
-                                    if (mixedMode) service.minCartMixedInKg.times((service.pricePerKg ?: 1)) 
-                                    else service.minCartSegregatedInKg?.times((service.pricePerKg ?: 1))} " +
-                                    "(${if (mixedMode) service.minCartMixedInKg else service.minCartSegregatedInKg}kg)",
+                                    if (mixedMode) serviceItem.minCartMixedInKg.times((serviceItem.pricePerKg ?: 1)) 
+                                    else serviceItem.minCartSegregatedInKg?.times((serviceItem.pricePerKg ?: 1))} " +
+                                    "(${if (mixedMode) serviceItem.minCartMixedInKg else serviceItem.minCartSegregatedInKg}kg)",
                             color = Gray800,
                             fontSize = 14.sp,
                             lineHeight = 14.sp,
@@ -165,7 +166,7 @@ fun ServiceDetailsCard(
             }
 
             // mixed and segregated
-            if (service.minCartMixedInKg != null) {
+            if (serviceItem.minCartMixedInKg != null) {
                 Column(modifier = Modifier.width(200.dp)) {
                     AppText(
                         text = if (mixedMode) "your whites and colored items will be washed together and tumble dried"
@@ -208,7 +209,7 @@ fun ServiceDetailsCard(
 
             // add / remove
             Button(
-                onClick = { onEvent(ServicesScreenEvent.ToggleOptedService(service.id)) },
+                onClick = { onEvent(ServicesScreenEvent.ToggleOptedService(serviceItem.id)) },
                 shape = RoundedCornerShape(6.dp),
                 border = BorderStroke(1.dp, Gray800),
                 colors = ButtonDefaults.buttonColors(backgroundColor = if (isOpted) Gray50 else Gray800),

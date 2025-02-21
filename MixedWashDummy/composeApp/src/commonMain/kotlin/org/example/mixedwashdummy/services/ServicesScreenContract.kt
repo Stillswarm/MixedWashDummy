@@ -1,9 +1,9 @@
 package org.example.mixedwashdummy.services
 
-import org.example.mixedwashdummy.Service
+import org.example.mixedwashdummy.ServiceItem
 
 data class ServicesScreenState(
-    val services: List<Service>,
+    val serviceItems: List<ServiceItem>,
     val currentService: Int,
     val optedServices: MutableSet<Int>,
     val mixedMode: Boolean = true,  // whether mixed mode is currently shown (the other possible mode is segregated)

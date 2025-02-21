@@ -6,6 +6,7 @@ plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.composeMultiplatform)
     alias(libs.plugins.composeCompiler)
+    kotlin("plugin.serialization")
 }
 
 kotlin {
@@ -56,6 +57,9 @@ kotlin {
 
             // Datetime
             implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.5.0")
+
+            // serialization
+            implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.8.0")
         }
     }
 }

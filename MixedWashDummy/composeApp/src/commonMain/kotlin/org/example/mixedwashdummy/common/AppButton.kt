@@ -46,7 +46,6 @@ fun AppButton(
         interactionSource = interactionSource,
         colors = ButtonDefaults.buttonColors(backgroundColor = backgroundColor),
         contentPadding = contentPadding,
-
         ) {
         AppText(
             text = buttonTitle,

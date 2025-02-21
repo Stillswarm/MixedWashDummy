@@ -11,12 +11,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import org.example.mixedwashdummy.Service
 import org.example.mixedwashdummy.util.edgePadding
 
 @Composable
 fun ServicesScreen(
-    services: List<Service>,
     state: ServicesScreenState,
     onEvent: (ServicesScreenEvent) -> Unit,
     modifier: Modifier = Modifier,
@@ -27,9 +25,9 @@ fun ServicesScreen(
     ) {
         Row {
             LazyColumn(verticalArrangement = Arrangement.spacedBy(8.dp)) {
-                itemsIndexed(services) { index, item ->
+                itemsIndexed(state.serviceItems) { index, item ->
                     ServiceTab(
-                        service = item,
+                        serviceItem = item,
                         isOpted = state.optedServices.contains(index),
                         isCurrent = index == state.currentService,
                         onClick = { onEvent(ServicesScreenEvent.ToggleCurrentService(index)) },
@@ -39,7 +37,7 @@ fun ServicesScreen(
             }
 
             ServiceDetailsCard(
-                service = services[state.currentService],
+                serviceItem = state.serviceItems[state.currentService],
                 onEvent = onEvent,
                 mixedMode = state.mixedMode,
                 modifier = Modifier.weight(1f),
@@ -47,6 +45,11 @@ fun ServicesScreen(
             )
         }
 
-        ServicesFooter(modifier = Modifier.align(Alignment.BottomCenter))
+        ServicesFooter(
+            selectedItemsSize = state.optedServices.size,
+            price = state.totalCost,
+            onProceed = {},
+            modifier = Modifier.align(Alignment.BottomCenter)
+        )
     }
 }

@@ -11,7 +11,7 @@ class ServicesScreenViewModel constructor(
 ) {
 
     private val initialState = ServicesScreenState(
-        services = DummyData.services,
+        serviceItems = DummyData.services,
         currentService = 0,
         optedServices = mutableSetOf(),
         totalCost = 0,
@@ -49,14 +49,37 @@ class ServicesScreenViewModel constructor(
     }
 
     private fun toggleOptedServices(serviceId: Int) {
+        var removed = false
         _uiState.update {
             it.copy(
                 optedServices = it.optedServices.toMutableSet().apply {
-                    if (contains(serviceId)) remove(serviceId) else add(serviceId)
+                    if (contains(serviceId)) {
+                        remove(serviceId)
+                        removed = true
+                    } else {
+                        add(serviceId)
+                    }
                 }
             )
         }
 
-        println(_uiState.value.optedServices.toString())
+        var cost = 0
+        val item = _uiState.value.serviceItems[serviceId]
+        if (item.pricePerKg != null) {
+            cost = item.pricePerKg * (if (_uiState.value.mixedMode) item.minCartMixedInKg ?: 1 else item.minCartSegregatedInKg ?: 1)
+        } else if (item.pricePerPair != null) {
+            cost = item.pricePerPair
+        }
+
+        if (removed) cost *= -1
+        updateCost(cost)
+    }
+
+    // the parameter add can be positive or negative depending on whether
+    // the item is being added or removed
+    private fun updateCost(add: Int) {
+        _uiState.update {
+            it.copy(totalCost = it.totalCost + add)
+        }
     }
 }

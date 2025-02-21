@@ -23,7 +23,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import org.example.mixedwashdummy.Service
+import org.example.mixedwashdummy.ServiceItem
 import org.example.mixedwashdummy.common.AppText
 import org.example.mixedwashdummy.common.AsyncImageLoader
 import org.example.mixedwashdummy.theme.Gray100
@@ -33,7 +33,7 @@ import org.example.mixedwashdummy.util.gradient
 
 @Composable
 fun ServicesSection(
-    services: List<Service>,
+    serviceItems: List<ServiceItem>,
     modifier: Modifier = Modifier,
     onSeeAll: () -> Unit,
     textColor: Color = Gray700
@@ -57,7 +57,7 @@ fun ServicesSection(
         Spacer(Modifier.height(18.dp))
 
         LazyRow(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-            items(services) {
+            items(serviceItems) {
                 ServiceCard(it, onClick = {})
             }
         }
@@ -65,7 +65,7 @@ fun ServicesSection(
 }
 
 @Composable
-fun ServiceCard(service: Service, onClick: () -> Unit, modifier: Modifier = Modifier) {
+fun ServiceCard(serviceItem: ServiceItem, onClick: () -> Unit, modifier: Modifier = Modifier) {
     Box(
         modifier = modifier.width(130.dp).clip(RoundedCornerShape(12.dp))
             .gradient(colorStops = arrayOf(Pair(1f, Gray100), Pair(1f, Gray300)))
@@ -77,7 +77,7 @@ fun ServiceCard(service: Service, onClick: () -> Unit, modifier: Modifier = Modi
             verticalArrangement = Arrangement.spacedBy(12.dp)
         ) {
             AsyncImageLoader(
-                imageUrl = service.imageUrl,
+                imageUrl = serviceItem.imageUrl,
                 contentDescription = null,
                 modifier = Modifier.height(80.17.dp)
                     .width(100.dp),
@@ -86,7 +86,7 @@ fun ServiceCard(service: Service, onClick: () -> Unit, modifier: Modifier = Modi
 
             // TODO: Confirm the font size here
             AppText(
-                text = service.title,
+                text = serviceItem.title,
                 fontSize = 11.sp,
                 modifier = Modifier.padding(horizontal = 10.17.dp)
             )
