@@ -11,18 +11,18 @@ import androidx.compose.material.Divider
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import kotlinx.datetime.Clock
 import mixedwashdummy.composeapp.generated.resources.Res
 import mixedwashdummy.composeapp.generated.resources.hangar_order_icon
 import mixedwashdummy.composeapp.generated.resources.insights_icon
-import org.example.mixedwashdummy.InsightMetric
 import org.example.mixedwashdummy.common.TitleWithIcon
 import org.example.mixedwashdummy.theme.dividerBlack
-import org.example.mixedwashdummy.util.edgePadding
+import org.example.mixedwashdummy.util.DateTimeUtils
 
 @Composable
-fun OrderHistoryScreen(insightMetrics: List<InsightMetric>, modifier: Modifier = Modifier) {
+fun OrderHistoryScreen(state: OrderHistoryState, modifier: Modifier = Modifier) {
     LazyColumn(
-        modifier = modifier.fillMaxSize().edgePadding().padding(16.dp),
+        modifier = modifier.fillMaxSize().padding(16.dp),
         verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
         item {
@@ -31,7 +31,7 @@ fun OrderHistoryScreen(insightMetrics: List<InsightMetric>, modifier: Modifier =
 
         item {
             LazyRow(horizontalArrangement = Arrangement.spacedBy(16.dp)) {
-                items(insightMetrics) {
+                items(state.insights) {
                     StatisticCard(
                         value = 29,
                         metric = it.metric,
@@ -47,18 +47,19 @@ fun OrderHistoryScreen(insightMetrics: List<InsightMetric>, modifier: Modifier =
             TitleWithIcon(title = "Orders", icon = Res.drawable.hangar_order_icon)
         }
 
-        items(10) {
+        items(state.orders) { order ->
             Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
-                /*
-                    the status currently takes a random value between [0, 2]
-                 */
                 OrderSummaryCard(
-                    orderId = "1022154",
-                    title1 = "Wash & Fold",
-                    title2 = "Dry Cleaning",
-                    title3 = "Shoe Wash",
-                    status = (0..2).random(),
-                    cost = 1024,
+                    orderId = order.orderId,
+                    titles = order.services.map { it.title },
+                    ordered = DateTimeUtils.formatTimestamp(order.orderedTimestamp),
+                    delivery = if (order.deliveryTimestamp != null) DateTimeUtils.formatTimestamp(
+                        order.deliveryTimestamp
+                    ) else null,
+                    status = if (order.deliveryTimestamp == null) 2
+                                else if (order.deliveryTimestamp > Clock.System.now().toEpochMilliseconds()) 0
+                                else 1,
+                    cost = order.price,
                     onDetails = {},
                 )
 

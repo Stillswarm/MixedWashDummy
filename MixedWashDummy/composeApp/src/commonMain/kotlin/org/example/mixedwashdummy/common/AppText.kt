@@ -8,6 +8,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.sp
 import org.example.mixedwashdummy.theme.Gray700
@@ -16,6 +17,8 @@ import org.example.mixedwashdummy.theme.Gray700
 fun AppText(
     text: String,
     modifier: Modifier = Modifier,
+    maxLines: Int = Int.MAX_VALUE,
+    overflow: TextOverflow = TextOverflow.Clip,
     color: Color = Gray700,
     style: TextStyle = MaterialTheme.typography.h6,
     fontSize: TextUnit = TextUnit.Unspecified,
@@ -33,6 +36,8 @@ fun AppText(
         fontSize = fontSize,
         lineHeight = lineHeight,
         letterSpacing = letterSpacing,
-        textAlign = textAlign
+        textAlign = textAlign,
+        maxLines = maxLines,
+        overflow = overflow
     )
 }

@@ -53,6 +53,9 @@ kotlin {
             implementation(libs.coil.network.ktor)
 
             implementation("com.google.accompanist:accompanist-systemuicontroller:0.30.1")
+
+            // Datetime
+            implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.5.0")
         }
     }
 }

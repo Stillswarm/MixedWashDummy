@@ -12,6 +12,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -27,14 +28,13 @@ import org.example.mixedwashdummy.theme.Yellow
 /**
  * @param status 0 - Processing, 1 - Delivered, 2 - Cancelled, else - Unknown
  *
- * TODO: find better names for title1, title2, title3
  */
 @Composable
 fun OrderSummaryCard(
-    orderId: String,
-    title1: String,
-    title2: String,
-    title3: String,
+    orderId: Long,
+    titles: List<String>,
+    ordered: String,
+    delivery: String?,
     status: Int,
     cost: Int?,
     onDetails: () -> Unit,
@@ -52,7 +52,7 @@ fun OrderSummaryCard(
         ) {
             Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                 IndicationChip(
-                    text = orderId,
+                    text = orderId.toString(),
                     textColor = Gray100,
                     backgroundColor = Gray800,
                     borderColor = Gray800,
@@ -75,11 +75,10 @@ fun OrderSummaryCard(
                     backgroundColor = when (status) {
                         0 -> Gray50
                         1 -> Green
-                        2 -> Gray100
+                        2 -> Gray50
                         else -> Color.Unspecified
                     },
                     borderColor = when (status) {
-                        // TODO: change the "Processing" color to Brown
                         0 -> Yellow
                         1 -> Green
                         2 -> Gray800
@@ -96,8 +95,10 @@ fun OrderSummaryCard(
         }
 
         AppText(
-            text = "$title1 • $title2 • $title3",
+            text = titles.joinToString(" • "),
             fontSize = 16.sp,
+            maxLines = 2,
+            overflow = TextOverflow.Ellipsis,
             fontWeight = FontWeight.Medium,
             modifier = Modifier.fillMaxWidth(0.75f),
             color = Gray800
@@ -111,15 +112,13 @@ fun OrderSummaryCard(
             Row(horizontalArrangement = Arrangement.spacedBy(18.dp)) {
                 TimeTracker(
                     action = "Ordered",
-                    date = "13 Dec",
-                    time = "3:00 pm",
+                    datetime = ordered,
                     textColor = Gray800
                 )
 
                 TimeTracker(
                     action = if (status == 1) "Delivered" else "Est. Delivery",
-                    date = "14 Dec",
-                    time = "3:00 pm",
+                    datetime = delivery ?: "-",
                     textColor = Gray800,
                 )
             }
@@ -138,8 +137,7 @@ fun OrderSummaryCard(
 @Composable
 fun TimeTracker(
     action: String,
-    date: String,
-    time: String,
+    datetime: String,
     textColor: Color,
     fontSize: TextUnit = 12.sp,
 ) {
@@ -154,7 +152,7 @@ fun TimeTracker(
         )
 
         AppText(
-            text = "$date • $time",
+            text = datetime,
             color = textColor,
             fontSize = fontSize,
             style = MaterialTheme.typography.subtitle1

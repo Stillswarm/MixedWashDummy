@@ -7,6 +7,8 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import org.example.mixedwashdummy.history.OrderHistoryScreen
+import org.example.mixedwashdummy.history.OrderHistoryViewModel
 import org.example.mixedwashdummy.services.ServicesScreen
 import org.example.mixedwashdummy.services.ServicesScreenViewModel
 import org.example.mixedwashdummy.theme.Gray50
@@ -37,15 +39,15 @@ fun App(onScroll: (Boolean) -> Unit) {
     MaterialTheme(
         typography = customTypography
     ) {
-        val viewModel = remember { ServicesScreenViewModel() }
+        val viewModel = remember { OrderHistoryViewModel() }
         val state by viewModel.uiState.collectAsStateWithLifecycle()
-        ServicesScreen(
+        OrderHistoryScreen(
 //            onboardingData = DummyData.onboardingData,
-            services = DummyData.services,
+//            services = DummyData.services,
 //            insightMetrics = DummyData.insightMetrics,
 //            onScroll = onScroll,
             state = state,
-            onEvent = viewModel::onEvent,
+//            onEvent = viewModel::onEvent,
             modifier = Modifier.background(Gray50)
         )
     }
