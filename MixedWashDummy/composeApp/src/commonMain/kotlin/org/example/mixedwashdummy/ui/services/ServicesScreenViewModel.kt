@@ -56,22 +56,28 @@ class ServicesScreenViewModel constructor(
     }
 
     private fun updateCartEntry(cartEntry: CartEntry) {
+        // check if this service(not just the variant) is already present
+        // NOTE: if this request is first made from the "mixed" variant, and then again from
+        //       the "segregated" variant, we'll still have an "existing entry", which will then be deleted
         val existingEntry = _uiState.value.cartEntries.find { it.serviceId == cartEntry.serviceId }
-        if (existingEntry != null) {
+
+        if (existingEntry != null) {    // entry exists, remove
             _uiState.update {
                 it.copy(
-                    cartEntries = it.cartEntries - existingEntry
+                    cartEntries = it.cartEntries - existingEntry    // remove the existing entry, and not the newly sent
                 )
             }
 
-            updateCost(-existingEntry.price)
-            toggleOptedService(cartEntry.serviceId, false)
-        } else {
+            updateCost(-existingEntry.price)    // decrement the total cart price by existing entry's price
+            toggleOptedService(cartEntry.serviceId, false)  // this service is no longer opted, remove from list
+
+        } else {    // not found, add
             _uiState.update {
                 it.copy(
                     cartEntries = it.cartEntries + cartEntry
                 )
             }
+
             updateCost(cartEntry.price)
             toggleOptedService(cartEntry.serviceId, true)
         }
