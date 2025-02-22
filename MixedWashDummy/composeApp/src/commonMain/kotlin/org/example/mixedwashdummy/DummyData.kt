@@ -1,8 +1,6 @@
 package org.example.mixedwashdummy
 
 import androidx.compose.ui.graphics.Color
-import kotlinx.serialization.SerialName
-import kotlinx.serialization.Serializable
 import mixedwashdummy.composeapp.generated.resources.Res
 import mixedwashdummy.composeapp.generated.resources.ic_hourglass
 import mixedwashdummy.composeapp.generated.resources.ic_washing_machine
@@ -10,26 +8,57 @@ import mixedwashdummy.composeapp.generated.resources.ic_water_drop
 import mixedwashdummy.composeapp.generated.resources.onboarding_image1
 import mixedwashdummy.composeapp.generated.resources.onboarding_image2
 import mixedwashdummy.composeapp.generated.resources.onboarding_image3
-import org.example.mixedwashdummy.theme.Gray400
-import org.example.mixedwashdummy.theme.Gray500
-import org.example.mixedwashdummy.theme.Gray600
-import org.example.mixedwashdummy.theme.Gray700
-import org.example.mixedwashdummy.theme.Gray900
+import org.example.mixedwashdummy.models.HomeHeaderData
+import org.example.mixedwashdummy.models.InsightMetric
+import org.example.mixedwashdummy.models.OrderHistoryData
+import org.example.mixedwashdummy.models.ServiceItem
+import org.example.mixedwashdummy.models.ServiceVariant
+import org.example.mixedwashdummy.models.ServiceVariantName
+import org.example.mixedwashdummy.ui.theme.Gray400
+import org.example.mixedwashdummy.ui.theme.Gray500
+import org.example.mixedwashdummy.ui.theme.Gray600
+import org.example.mixedwashdummy.ui.theme.Gray700
+import org.example.mixedwashdummy.ui.theme.Gray900
 import org.jetbrains.compose.resources.DrawableResource
 
 object DummyData {
+
+    val mixedWashAndFoldItem = ServiceVariant(
+        variantName = ServiceVariantName.Mixed,
+        description = "your whites and colored items will be washed together and tumble dried",
+        minCart = 4
+    )
+
+    val mixedWashAndIronItem = ServiceVariant(
+        variantName = ServiceVariantName.Mixed,
+        description = "your whites and colored items will be washed together and tumble dried",
+        minCart = 3,
+    )
+
+    val segregatedWashAndFoldItem = ServiceVariant(
+        variantName = ServiceVariantName.Segregated,
+        description = "your whites and colored clothes are segregated and washed separately",
+        minCart = 8
+    )
+
+    val segregatedWashAndIronItem = ServiceVariant(
+        variantName = ServiceVariantName.Segregated,
+        description = "your whites and colored clothes are segregated and washed separately",
+        minCart = 6
+    )
+
     val washAndIronServiceItem = ServiceItem(
         id = 0,
         title = "Wash & Iron",
         description = "best for shirts, t-shirts, trousers, and office wears",
         imageUrl = "sku_wash_and_iron",
-        minCartMixedInKg = 3,
-        minCartSegregatedInKg = 6,
-        pricePerKg = 150,
         inclusions = "You could include everyday laundry items like shirts, trousers, t-shirts, leggings, regular wear kurtis and other items which can be machine washed and tumble dried.",
         exclusions = "blazers, doormats, sarees, blouses, shoes, chappals, heavily embroidered items, blankets and other bulky items. Also, do not include DRY CLEAN ONLY items and items that are not suitable for tumble dryer.",
         deliveryTimeMinInHrs = 24,
-        deliveryTimeMaxInHrs = 24
+        deliveryTimeMaxInHrs = 24,
+        unit = "kg",
+        variants = listOf(mixedWashAndIronItem, segregatedWashAndIronItem),
+        pricing = 105f,
     )
 
     val washAndFoldServiceItem = ServiceItem(
@@ -37,13 +66,13 @@ object DummyData {
         title = "Wash & Fold",
         description = "best for shirts, t-shirts, trousers, inner-wears & regular daily wears",
         imageUrl = "sku_wash_and_fold",
-        minCartMixedInKg = 4,
-        minCartSegregatedInKg = 8,
-        pricePerKg = 95,
         inclusions = "You could include everyday laundry items like Shirts, Trousers, T-Shirts, Innerwear, Leggings, Regular wear kurtis and other items which can be machine washed and tumble dried. Apart from regular clothes you could also include a Bedsheet and 2-3 pillow covers in a 4 kg load",
         exclusions = "Blazers, Doormats, Sarees, Blouses, shoes, chappals, heavily embroidered items, blankets and other bulky items. Also, do not include DRY CLEAN ONLY items and items that are not suitable for tumble dryer.",
         deliveryTimeMinInHrs = 24,
-        deliveryTimeMaxInHrs = 24
+        deliveryTimeMaxInHrs = 24,
+        variants = listOf(mixedWashAndFoldItem, segregatedWashAndFoldItem),
+        unit = "kg",
+        pricing = 95f
     )
 
     val dryClean = ServiceItem(
@@ -51,13 +80,12 @@ object DummyData {
         title = "Dry Clean",
         description = "best for stained items and delicate garments",
         imageUrl = "sku_dry_clean",
-        minCartMixedInKg = null,
-        minCartSegregatedInKg = null,
-        pricePerKg = 100,
         inclusions = "todo",
         exclusions = "todo",
         deliveryTimeMinInHrs = 24,
-        deliveryTimeMaxInHrs = 48
+        deliveryTimeMaxInHrs = 48,
+        cartItems = listOf(),
+        unit = "kg",
     )
 
     val heavyWash = ServiceItem(
@@ -65,13 +93,12 @@ object DummyData {
         title = "Heavy Wash",
         description = "best for blankets, towels, bedsheets & fabric mats",
         imageUrl = "sku_heavy_wash",
-        minCartMixedInKg = 4,
-        minCartSegregatedInKg = 8,
-        pricePerKg = 140,
         inclusions = "Bed Sheets, Blankets, Pillow Covers, Towels, Curtains and other bulky items.",
         exclusions = "Blazers, Doormats, Sarees, Blouses, shoes, chappals, heavily embroidered items. Also, do not include DRY CLEAN ONLY items and items that are not suitable for tumble dryer.",
         deliveryTimeMinInHrs = 24,
-        deliveryTimeMaxInHrs = 48
+        deliveryTimeMaxInHrs = 48,
+        unit = "kg",
+        pricing = 140f
     )
 
     val shoeCleanServiceItem = ServiceItem(
@@ -79,14 +106,12 @@ object DummyData {
         title = "Shoe Clean",
         description = "best for sneakers, sports and casual shoes",
         imageUrl = "sku_shoe_clean",
-        minCartMixedInKg = null,
-        minCartSegregatedInKg = null,
-        pricePerPair = 350,
-        pricePerKg = null,
         inclusions = "Sneakers, Loafers, Sandals, Flip flops and Sports Shoes",
         exclusions = "Any leather footwear",
         deliveryTimeMinInHrs = 72,
-        deliveryTimeMaxInHrs = 72
+        deliveryTimeMaxInHrs = 72,
+        pricing = 350f,
+        unit = "pair"
     )
 
     val services = listOf(
@@ -180,7 +205,12 @@ object DummyData {
         ),
         OrderHistoryData(
             orderId = 1024298,
-            serviceItems = listOf(washAndIronServiceItem, dryClean, heavyWash, washAndFoldServiceItem),
+            serviceItems = listOf(
+                washAndIronServiceItem,
+                dryClean,
+                heavyWash,
+                washAndFoldServiceItem
+            ),
             orderedTimestamp = 1708464000000L,
             deliveryTimestamp = null,
             price = 2048
@@ -195,57 +225,39 @@ object DummyData {
     )
 }
 
-@Serializable
-data class ServiceItem(
-    val id: Int,
-    val title: String,
-    val description: String,
-    @SerialName("image_url")
-    val imageUrl: String,
-    @SerialName("min_cart_mixed_kg")
-    val minCartMixedInKg: Int?,
-    @SerialName("min_cart_segregated_kg")
-    val minCartSegregatedInKg: Int?,
-    @SerialName("price_per_pair")
-    val pricePerPair: Int? = null,
-    @SerialName("price_per_kg")
-    val pricePerKg: Int?,
-    val inclusions: String,
-    val exclusions: String,
-    @SerialName("delivery_time_min_hrs")
-    val deliveryTimeMinInHrs: Int,
-    @SerialName("delivery_time_max_hrs")
-    val deliveryTimeMaxInHrs: Int,
-)
+/*
+    fix colors and card in services ui ✔
+    should contain List<cartItems> -> specifics, -> gender
+    screen sends the cartItem id -> viewmodel checks which service it belongs to
+    data class OnCartItemSelected(val cartItemId: Int, val isAdded: Boolean) // find better names
 
-data class HomeHeaderData(
-    val heading: String,
-    val imageUrl: String,
-    val description: String,
-    val buttonText: String,
-    val textColor: Color,
-    val gradientLight: Color,
-    val gradientDark: Color,
-    val gradientOrder: Int = 1, /* 1 for light-dark, 2 for dark-light */
-)
+    use float for prices
 
-data class InsightMetric(
-    val metric: String,
-    val unit: String,
-    val icon: DrawableResource
-)
+    parameters from the details section go in the schema
+
+    variant
+    pricing goes into its own object
+    edge cases
+    offer
+    imageUrl param should get the whole url
+    dry cleaning
+
+    OrderHistoryScreen
+    state should be represented as an enum
+
+    derived state
+
+    ----------------------
+
+    1. diff data type for prices not required, as price is bundles with the "CartItem" object
+    we only require the unit type (kg/pair),
+
+    2. what are the cartItems for heavy wash and shoe clean??
+ */
+
 
 data class OnboardingData(
     val title: String,
     val subtitle: String,
     val imageResource: DrawableResource
-)
-
-// order status is determined from whether the delivery timestamp is past, future or null
-data class OrderHistoryData(
-    val orderId: Long,
-    val serviceItems: List<ServiceItem>,
-    val orderedTimestamp: Long,
-    val deliveryTimestamp: Long?,   // null if the order was cancelled
-    val price: Int,
 )

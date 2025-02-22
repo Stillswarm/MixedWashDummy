@@ -7,10 +7,10 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import org.example.mixedwashdummy.services.ServicesScreen
-import org.example.mixedwashdummy.services.ServicesScreenViewModel
-import org.example.mixedwashdummy.theme.Gray50
-import org.example.mixedwashdummy.theme.Poppins
+import org.example.mixedwashdummy.ui.services.ServicesScreen
+import org.example.mixedwashdummy.ui.services.ServicesScreenViewModel
+import org.example.mixedwashdummy.ui.theme.Gray50
+import org.example.mixedwashdummy.ui.theme.Poppins
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable

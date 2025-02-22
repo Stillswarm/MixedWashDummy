@@ -29,15 +29,15 @@ import mixedwashdummy.composeapp.generated.resources.Res
 import mixedwashdummy.composeapp.generated.resources.emphasized_bullet
 import mixedwashdummy.composeapp.generated.resources.unemphasized_bullet
 import org.example.mixedwashdummy.OnboardingData
-import org.example.mixedwashdummy.common.AppButton
-import org.example.mixedwashdummy.common.AppText
-import org.example.mixedwashdummy.common.UnderlineBox
-import org.example.mixedwashdummy.theme.BlueDark
-import org.example.mixedwashdummy.theme.BlueDarker
-import org.example.mixedwashdummy.theme.Gray100
-import org.example.mixedwashdummy.theme.Gray400
-import org.example.mixedwashdummy.theme.Gray800
-import org.example.mixedwashdummy.theme.Yellow
+import org.example.mixedwashdummy.ui.common.AppButton
+import org.example.mixedwashdummy.ui.common.AppText
+import org.example.mixedwashdummy.ui.common.UnderlineBox
+import org.example.mixedwashdummy.ui.theme.BlueDark
+import org.example.mixedwashdummy.ui.theme.BlueDarker
+import org.example.mixedwashdummy.ui.theme.Gray100
+import org.example.mixedwashdummy.ui.theme.Gray400
+import org.example.mixedwashdummy.ui.theme.Gray800
+import org.example.mixedwashdummy.ui.theme.Yellow
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.vectorResource
 
