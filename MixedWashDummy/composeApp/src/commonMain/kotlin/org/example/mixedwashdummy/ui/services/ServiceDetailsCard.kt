@@ -39,7 +39,6 @@ import mixedwashdummy.composeapp.generated.resources.ic_history
 import org.example.mixedwashdummy.models.ServiceItem
 import org.example.mixedwashdummy.models.ServiceVariant
 import org.example.mixedwashdummy.ui.common.AppOutlinedButton
-import org.example.mixedwashdummy.ui.common.AppText
 import org.example.mixedwashdummy.ui.common.AsyncImageLoader
 import org.example.mixedwashdummy.ui.theme.Gray100
 import org.example.mixedwashdummy.ui.theme.Gray50
@@ -80,7 +79,7 @@ fun ServiceDetailsCard(
             ) {
 
                 // title
-                AppText(
+                Text(
                     text = serviceItem.title,
                     fontWeight = FontWeight.Medium,
                     fontSize = 24.sp,
@@ -97,7 +96,7 @@ fun ServiceDetailsCard(
                         contentDescription = null
                     )
 
-                    AppText(
+                    Text(
                         text = "${serviceItem.deliveryTimeMinInHrs} hrs",
                         fontSize = 14.sp,
                         lineHeight = 16.8.sp,
@@ -106,7 +105,7 @@ fun ServiceDetailsCard(
                 }
 
                 // description
-                AppText(
+                Text(
                     text = serviceItem.description,
                     color = Gray500,
                     fontSize = 14.sp,
@@ -116,14 +115,14 @@ fun ServiceDetailsCard(
                 // pricing
                 if (serviceItem.pricing != null) {
                     Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
-                        AppText(
+                        Text(
                             text = "pricing",
                             color = Gray500,
                             fontSize = 12.sp,
                             lineHeight = 16.8.sp
                         )
 
-                        AppText(
+                        Text(
                             text = "₹${serviceItem.pricing} /${serviceItem.unit}",
                             color = Gray800,
                             fontSize = 14.sp,
@@ -134,14 +133,14 @@ fun ServiceDetailsCard(
 
                     if (currentVariant != null && minCartPrice != null) {
                         Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
-                            AppText(
+                            Text(
                                 text = "minimum cart",
                                 color = Gray500,
                                 fontSize = 12.sp,
                                 lineHeight = 16.8.sp
                             )
 
-                            AppText(
+                            Text(
                                 text = "₹${minCartPrice} (${currentVariant.minCart} ${serviceItem.unit})",      // TODO: set the min cart along with price
                                 color = Gray800,
                                 fontSize = 14.sp,
@@ -156,7 +155,7 @@ fun ServiceDetailsCard(
             // mixed and segregated
             if (currentVariant != null) {
                 Column(modifier = Modifier.width(200.dp)) {
-                    AppText(
+                    Text(
                         text = currentVariant.description,
                         lineHeight = 16.8.sp,
                         fontSize = 12.sp,
@@ -233,7 +232,7 @@ fun ServiceDetailsCard(
             Divider(color = dividerBlack, thickness = 1.5.dp)
 
             // details
-            AppText(
+            Text(
                 text = "Details",
                 fontWeight = FontWeight.Medium,
                 lineHeight = 24.sp,
@@ -289,14 +288,14 @@ fun DetailParameter(key: String, value: String, modifier: Modifier = Modifier) {
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
-        AppText(
+        Text(
             text = key,
             color = Gray800,
             fontSize = 12.sp,
             lineHeight = 16.sp
         )
 
-        AppText(
+        Text(
             text = value,
             color = Gray800,
             style = MaterialTheme.typography.subtitle1,

@@ -4,6 +4,7 @@ import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -27,7 +28,7 @@ fun IndicationChip(
         backgroundColor = backgroundColor,
         border = BorderStroke(1.dp, borderColor),
     ) {
-        AppText(
+        Text(
             modifier = Modifier.padding(6.dp),
             text = "$leadingIcon $text",
             fontSize = 12.sp,

@@ -17,7 +17,7 @@ class ServicesScreenViewModel constructor(
         cartEntries = emptyList(),
         currentVariantName = ServiceVariantName.Mixed,
         totalCost = 0f,
-        selectedServices = emptyList()
+        selectedServices = emptyList(),
     )
 
     private var _uiState = MutableStateFlow<ServicesScreenState>(initialState)
@@ -60,7 +60,7 @@ class ServicesScreenViewModel constructor(
         if (existingEntry != null) {
             _uiState.update {
                 it.copy(
-                    cartEntries = it.cartEntries - cartEntry
+                    cartEntries = it.cartEntries - existingEntry
                 )
             }
 

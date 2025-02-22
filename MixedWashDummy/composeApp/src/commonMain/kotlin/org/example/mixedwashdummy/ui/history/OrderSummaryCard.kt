@@ -17,7 +17,8 @@ import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import org.example.mixedwashdummy.ui.common.AppOutlinedButton
-import org.example.mixedwashdummy.ui.common.AppText
+import androidx.compose.material.Text
+import org.example.mixedwashdummy.models.OrderDeliveryStatus
 import org.example.mixedwashdummy.ui.common.IndicationChip
 import org.example.mixedwashdummy.ui.theme.Gray100
 import org.example.mixedwashdummy.ui.theme.Gray50
@@ -35,7 +36,7 @@ fun OrderSummaryCard(
     titles: List<String>,
     ordered: String,
     delivery: String?,
-    status: Int,
+    status: OrderDeliveryStatus,
     cost: Int?,
     onDetails: () -> Unit,
     modifier: Modifier = Modifier
@@ -60,41 +61,32 @@ fun OrderSummaryCard(
                 )
 
                 IndicationChip(
-                    text = when (status) {
-                        0 -> "Processing"
-                        1 -> "Delivered"
-                        2 -> "Cancelled"
-                        else -> "Unknown"
-                    },
+                    text = status.toString() ,
                     textColor = when (status) {
-                        0 -> Yellow
-                        1 -> Gray100
-                        2 -> Gray800
-                        else -> Color.Unspecified
+                        OrderDeliveryStatus.Processing -> Yellow
+                        OrderDeliveryStatus.Delivered -> Gray100
+                        OrderDeliveryStatus.Cancelled -> Gray800
                     },
                     backgroundColor = when (status) {
-                        0 -> Gray50
-                        1 -> Green
-                        2 -> Gray50
-                        else -> Color.Unspecified
+                        OrderDeliveryStatus.Delivered -> Green
+                        else -> Gray50
                     },
                     borderColor = when (status) {
-                        0 -> Yellow
-                        1 -> Green
-                        2 -> Gray800
-                        else -> Color.Unspecified
+                        OrderDeliveryStatus.Processing -> Yellow
+                        OrderDeliveryStatus.Delivered -> Green
+                        OrderDeliveryStatus.Cancelled -> Gray800
                     },
                     leadingIcon = '•'
                 )
             }
 
-            AppText(
+            Text(
                 text = "₹${cost ?: "-"}",
                 style = MaterialTheme.typography.h5
             )
         }
 
-        AppText(
+        Text(
             text = titles.joinToString(" • "),
             fontSize = 16.sp,
             maxLines = 2,
@@ -117,7 +109,7 @@ fun OrderSummaryCard(
                 )
 
                 TimeTracker(
-                    action = if (status == 1) "Delivered" else "Est. Delivery",
+                    action = if (status == OrderDeliveryStatus.Delivered) "Delivered" else "Est. Delivery",
                     datetime = delivery ?: "-",
                     textColor = Gray800,
                 )
@@ -144,14 +136,14 @@ fun TimeTracker(
     Column(
         verticalArrangement = Arrangement.spacedBy(2.dp)
     ) {
-        AppText(
+        Text(
             text = action,
             color = textColor,
             fontSize = fontSize,
             style = MaterialTheme.typography.subtitle1
         )
 
-        AppText(
+        Text(
             text = datetime,
             color = textColor,
             fontSize = fontSize,

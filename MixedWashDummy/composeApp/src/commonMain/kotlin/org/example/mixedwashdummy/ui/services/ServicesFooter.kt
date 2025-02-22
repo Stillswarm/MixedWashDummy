@@ -12,6 +12,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Icon
+import androidx.compose.material.IconButton
+import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.KeyboardArrowUp
 import androidx.compose.runtime.Composable
@@ -23,7 +25,6 @@ import androidx.compose.ui.unit.sp
 import mixedwashdummy.composeapp.generated.resources.Res
 import mixedwashdummy.composeapp.generated.resources.ic_success
 import org.example.mixedwashdummy.ui.common.AppButton
-import org.example.mixedwashdummy.ui.common.AppText
 import org.example.mixedwashdummy.ui.common.UnderlineBox
 import org.example.mixedwashdummy.ui.theme.Gray100
 import org.example.mixedwashdummy.ui.theme.Gray50
@@ -61,7 +62,7 @@ fun ServicesFooter(
                     )
 
                     Column {
-                        AppText(
+                        Text(
                             text = "20% OFF 'FLAT20' applied",
                             lineHeight = 12.sp,
                             fontSize = 12.sp,
@@ -70,7 +71,7 @@ fun ServicesFooter(
                         )
 
                         UnderlineBox(lineColor = Gray500) {
-                            AppText(
+                            Text(
                                 text = "modify",
                                 color = Gray500,
                                 lineHeight = 14.sp,
@@ -82,8 +83,8 @@ fun ServicesFooter(
 
                 Spacer(Modifier.height(12.dp))
 
-                Row {
-                    AppText(
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    Text(
                         text = "$selectedItemsSize items | ₹$price",
                         color = Gray900,
                         fontSize = 14.sp,
@@ -91,11 +92,13 @@ fun ServicesFooter(
                         fontWeight = FontWeight.SemiBold
                     )
 
-                    Icon(
-                        imageVector = Icons.Default.KeyboardArrowUp,
-                        contentDescription = null,
-                        modifier = Modifier.size(18.dp)
-                    )
+                    IconButton(onClick = {}) {
+                        Icon(
+                            imageVector = Icons.Default.KeyboardArrowUp,
+                            contentDescription = null,
+                            modifier = Modifier.size(18.dp)
+                        )
+                    }
                 }
             }
 

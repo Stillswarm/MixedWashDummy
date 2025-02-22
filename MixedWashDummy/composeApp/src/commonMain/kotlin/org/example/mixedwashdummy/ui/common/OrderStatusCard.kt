@@ -85,7 +85,7 @@ fun OrderStatusCard(
                         Spacer(Modifier.height(8.dp))
 
                         Column {
-                            AppText(
+                            Text(
                                 text = description,
                                 fontSize = 12.sp,
                                 color = Gray700
@@ -94,7 +94,7 @@ fun OrderStatusCard(
                             Spacer(Modifier.height(6.dp))
 
                             UnderlineBox(lineColor = Gray700) {
-                                AppText(
+                                Text(
                                     text = "View Details",
                                     fontSize = 12.sp,
                                     color = Gray700,
@@ -167,7 +167,7 @@ fun ProgressStage(stageName: String, state: Int, modifier: Modifier = Modifier) 
                 }
         }
 
-        AppText(
+        Text(
             text = stageName,
             fontSize = 12.sp,
             color = Gray700,

@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -20,7 +21,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import org.example.mixedwashdummy.models.HomeHeaderData
 import org.example.mixedwashdummy.ui.common.AppOutlinedButton
-import org.example.mixedwashdummy.ui.common.AppText
 import org.example.mixedwashdummy.ui.common.AsyncImageLoader
 
 @Composable
@@ -47,14 +47,14 @@ fun HeaderContent(
             modifier = Modifier.defaultMinSize(minWidth = 189.dp),
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
-            AppText(
+            Text(
                 text = dataItem.heading,
                 color = dataItem.textColor,
                 fontWeight = FontWeight.Medium,
                 fontSize = 18.sp,
             )
 
-            AppText(
+            Text(
                 text = dataItem.description,
                 fontSize = 12.sp,
                 lineHeight = 18.sp,

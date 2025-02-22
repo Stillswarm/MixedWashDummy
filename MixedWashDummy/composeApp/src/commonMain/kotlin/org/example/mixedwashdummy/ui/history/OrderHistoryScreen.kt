@@ -11,7 +11,6 @@ import androidx.compose.material.Divider
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import kotlinx.datetime.Clock
 import mixedwashdummy.composeapp.generated.resources.Res
 import mixedwashdummy.composeapp.generated.resources.hangar_order_icon
 import mixedwashdummy.composeapp.generated.resources.insights_icon
@@ -53,12 +52,8 @@ fun OrderHistoryScreen(state: OrderHistoryState, modifier: Modifier = Modifier) 
                     orderId = order.orderId,
                     titles = order.serviceItems.map { it.title },
                     ordered = DateTimeUtils.formatTimestamp(order.orderedTimestamp),
-                    delivery = if (order.deliveryTimestamp != null) DateTimeUtils.formatTimestamp(
-                        order.deliveryTimestamp
-                    ) else null,
-                    status = if (order.deliveryTimestamp == null) 2
-                                else if (order.deliveryTimestamp > Clock.System.now().toEpochMilliseconds()) 0
-                                else 1,
+                    delivery = if (order.deliveryTimestamp != null) DateTimeUtils.formatTimestamp(order.deliveryTimestamp) else null,
+                    status = order.orderDeliveryStatus,
                     cost = order.price,
                     onDetails = {},
                 )

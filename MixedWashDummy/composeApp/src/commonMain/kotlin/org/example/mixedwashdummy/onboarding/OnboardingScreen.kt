@@ -30,7 +30,7 @@ import mixedwashdummy.composeapp.generated.resources.emphasized_bullet
 import mixedwashdummy.composeapp.generated.resources.unemphasized_bullet
 import org.example.mixedwashdummy.OnboardingData
 import org.example.mixedwashdummy.ui.common.AppButton
-import org.example.mixedwashdummy.ui.common.AppText
+import androidx.compose.material.Text
 import org.example.mixedwashdummy.ui.common.UnderlineBox
 import org.example.mixedwashdummy.ui.theme.BlueDark
 import org.example.mixedwashdummy.ui.theme.BlueDarker
@@ -68,7 +68,7 @@ fun OnboardingScreen(
                 modifier = Modifier.fillMaxWidth().padding(25.dp),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                AppText(
+                Text(
                     text = onboardingData[visibleIndex].title,
                     fontSize = 24.sp,
                     fontWeight = FontWeight.SemiBold,
@@ -79,7 +79,7 @@ fun OnboardingScreen(
 
                 Spacer(Modifier.height(24.dp))
 
-                AppText(
+                Text(
                     text = onboardingData[visibleIndex].subtitle,
                     fontSize = 16.sp,
                     fontWeight = FontWeight.Medium,
@@ -117,7 +117,7 @@ fun OnboardingScreen(
                     lineColor = Gray800,
                     modifier = Modifier.weight(1f)
                 ) {
-                    AppText(text = "Skip", fontSize = 16.sp, fontWeight = FontWeight.SemiBold)
+                    Text(text = "Skip", fontSize = 16.sp, fontWeight = FontWeight.SemiBold)
                 }
             }
 

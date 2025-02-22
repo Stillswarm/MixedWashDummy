@@ -10,6 +10,7 @@ import mixedwashdummy.composeapp.generated.resources.onboarding_image2
 import mixedwashdummy.composeapp.generated.resources.onboarding_image3
 import org.example.mixedwashdummy.models.HomeHeaderData
 import org.example.mixedwashdummy.models.InsightMetric
+import org.example.mixedwashdummy.models.OrderDeliveryStatus
 import org.example.mixedwashdummy.models.OrderHistoryData
 import org.example.mixedwashdummy.models.ServiceItem
 import org.example.mixedwashdummy.models.ServiceVariant
@@ -201,7 +202,8 @@ object DummyData {
             serviceItems = listOf(washAndFoldServiceItem, dryClean, shoeCleanServiceItem),
             orderedTimestamp = 1708464000000L,
             deliveryTimestamp = 1708464000000L,
-            price = 1024
+            price = 1024,
+            orderDeliveryStatus = OrderDeliveryStatus.Cancelled
         ),
         OrderHistoryData(
             orderId = 1024298,
@@ -213,14 +215,16 @@ object DummyData {
             ),
             orderedTimestamp = 1708464000000L,
             deliveryTimestamp = null,
-            price = 2048
+            price = 2048,
+            orderDeliveryStatus = OrderDeliveryStatus.Processing
         ),
         OrderHistoryData(
             orderId = 1000245,
             serviceItems = listOf(washAndFoldServiceItem),
             orderedTimestamp = 1708464000000L,
             deliveryTimestamp = 1808464000000L,
-            price = 1024
+            price = 1024,
+            orderDeliveryStatus = OrderDeliveryStatus.Delivered
         ),
     )
 }

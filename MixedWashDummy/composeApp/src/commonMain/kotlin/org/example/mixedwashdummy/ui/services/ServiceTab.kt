@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Icon
+import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Done
 import androidx.compose.runtime.Composable
@@ -22,7 +23,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import org.example.mixedwashdummy.models.ServiceItem
-import org.example.mixedwashdummy.ui.common.AppText
 import org.example.mixedwashdummy.ui.common.AsyncImageLoader
 import org.example.mixedwashdummy.ui.theme.Gray100
 import org.example.mixedwashdummy.ui.theme.Gray300
@@ -81,7 +81,7 @@ fun ServiceTab(
                 }
             }
 
-            AppText(
+            Text(
                 text = serviceItem.title,
                 color = if (isCurrent) Gray300 else Gray700,
                 lineHeight = 16.sp,

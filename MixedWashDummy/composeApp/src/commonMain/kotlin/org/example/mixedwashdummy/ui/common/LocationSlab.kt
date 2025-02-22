@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.KeyboardArrowDown
 import androidx.compose.material.icons.filled.LocationOn
@@ -43,7 +44,7 @@ fun LocationSlab(
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.spacedBy(6.dp)
             ) {
-                AppText(
+                Text(
                     text = addressKey,
                     color = contentColor,
                     fontWeight = FontWeight.Medium,
@@ -60,7 +61,7 @@ fun LocationSlab(
                 )
             }
 
-            AppText(
+            Text(
                 text = address,
                 fontSize = 12.sp,
                 lineHeight = 15.sp,

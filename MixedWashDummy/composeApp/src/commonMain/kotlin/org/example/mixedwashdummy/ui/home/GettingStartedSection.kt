@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -23,7 +24,6 @@ import mixedwashdummy.composeapp.generated.resources.Res
 import mixedwashdummy.composeapp.generated.resources.image1
 import org.example.mixedwashdummy.ui.common.AppButton
 import org.example.mixedwashdummy.ui.common.AppOutlinedButton
-import org.example.mixedwashdummy.ui.common.AppText
 import org.example.mixedwashdummy.ui.theme.Gray100
 import org.example.mixedwashdummy.ui.theme.Gray700
 import org.example.mixedwashdummy.ui.theme.Gray800
@@ -55,7 +55,7 @@ fun GettingStartedSection(
             Column(
                 verticalArrangement = Arrangement.spacedBy(12.dp)
             ) {
-                AppText(
+                Text(
                     text = "Getting Started?",
                     color = textColor,
                     lineHeight = 16.sp,
@@ -63,7 +63,7 @@ fun GettingStartedSection(
                     fontWeight = FontWeight.Medium
                 )
 
-                AppText(
+                Text(
                     text = "See how MixedWash works and learn more about our services.",
                     color = textColor,
                     lineHeight = 16.sp,

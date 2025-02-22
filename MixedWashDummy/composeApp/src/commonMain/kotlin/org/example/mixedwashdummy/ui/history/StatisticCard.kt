@@ -20,7 +20,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import org.example.mixedwashdummy.ui.common.AppText
+import androidx.compose.material.Text
 import org.example.mixedwashdummy.ui.theme.Gray200
 import org.example.mixedwashdummy.ui.theme.Gray400
 import org.jetbrains.compose.resources.DrawableResource
@@ -46,7 +46,7 @@ fun StatisticCard(
                 .padding(start = 16.dp, top = 22.dp, end = 16.dp, bottom = 18.dp)
         ) {
 
-            AppText(
+            Text(
                 modifier = Modifier.fillMaxWidth(),
                 text = value.toString(),
                 fontSize = 24.sp,
@@ -70,7 +70,7 @@ fun StatisticCard(
                         tint = Gray400
                     )
 
-                    AppText(
+                    Text(
                         text = "$metric\n• $unit",
                         color = Gray400,
                         fontSize = 12.sp,

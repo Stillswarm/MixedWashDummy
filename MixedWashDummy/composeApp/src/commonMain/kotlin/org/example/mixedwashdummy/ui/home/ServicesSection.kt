@@ -24,7 +24,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import org.example.mixedwashdummy.models.ServiceItem
-import org.example.mixedwashdummy.ui.common.AppText
 import org.example.mixedwashdummy.ui.common.AsyncImageLoader
 import org.example.mixedwashdummy.ui.theme.Gray100
 import org.example.mixedwashdummy.ui.theme.Gray300
@@ -85,7 +84,7 @@ fun ServiceCard(serviceItem: ServiceItem, onClick: () -> Unit, modifier: Modifie
             )
 
             // TODO: Confirm the font size here
-            AppText(
+            Text(
                 text = serviceItem.title,
                 fontSize = 11.sp,
                 modifier = Modifier.padding(horizontal = 10.17.dp)

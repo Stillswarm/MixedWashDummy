@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.material.Icon
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -31,7 +32,7 @@ fun TitleWithIcon(title: String, icon: DrawableResource, modifier: Modifier = Mo
 
         Spacer(Modifier.width(8.dp))
 
-        AppText(
+        Text(
             text = title,
             fontSize = 16.sp,
             fontWeight = FontWeight.SemiBold,
